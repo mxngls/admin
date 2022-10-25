@@ -1,10 +1,10 @@
 import { GetServerSideProps } from "next";
 import React, { useEffect, useState } from "react";
-import ProductAttribute from "../../../Components/ProductAttribute";
-import ImageUploadDialog from "../../../Components/ImageUploadDialog";
+import ProductAttribute from "../../../Components/admin/ProductAttribute";
+import ImageUploadDialog from "../../../Components/admin/ImageUploadDialog";
 import { Toaster } from "react-hot-toast";
-import ProductImagesContainer from "../../../Components/ProductImagesContainer";
-import ProductTitle from "../../../Components/ProductTitle";
+import ProductImagesContainer from "../../../Components/admin/ProductImagesContainer";
+import ProductTitle from "../../../Components/admin/ProductTitle";
 import {
     fetchImageData,
     fetchProductData,

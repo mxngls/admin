@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { supabase } from "../../lib/client";
 import { useRouter } from "next/router";
-import Button from "../../Components/Button";
+import Button from "../../Components/shared/Button";
 
 export default function LoginPage() {
     const emailRef = useRef<HTMLInputElement>(null);
