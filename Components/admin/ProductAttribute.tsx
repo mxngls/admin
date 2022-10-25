@@ -5,14 +5,11 @@ import React, {
     Dispatch,
     useRef,
 } from "react";
-import {
-    capitalizeFirstLetter,
-    useClickOutside,
-    useProductAttributeError,
-} from "../lib/helpers";
-import { ProductData, InputError } from "../lib/types";
+import { capitalizeFirstLetter } from "../../lib/helpers";
+import { useClickOutside, useProductAttributeError } from "../../lib/hooks";
+import { ProductData } from "../../lib/types";
 import toast from "react-hot-toast";
-import { updateProductData } from "../lib/queries";
+import { updateProductData } from "../../lib/queries";
 
 interface AttributeProps {
     id: number;

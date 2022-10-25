@@ -1,8 +1,8 @@
 import ProductImage from "./ProductImage";
-import Button from "./Button";
+import Button from "../shared/Button";
 import { Dispatch, SetStateAction } from "react";
 
-import { ImageData } from "../lib/types";
+import { ImageData } from "../../lib/types";
 
 interface ProductImagesContainerAttributes {
     productId: number;

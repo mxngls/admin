@@ -5,11 +5,11 @@ import React, {
     useRef,
     useState,
 } from "react";
-import { useClickOutside, useImageFileError } from "../lib/helpers";
-import Button from "./Button";
+import { useClickOutside, useImageFileError } from "../../lib/hooks";
+import Button from "../shared/Button";
 import toast from "react-hot-toast";
-import { insertImageData, uploadImage } from "../lib/queries";
-import { ImageData } from "../lib/types";
+import { insertImageData, uploadImage } from "../../lib/queries";
+import { ImageData } from "../../lib/types";
 
 interface ImageUploadDialogProps {
     images: ImageData[];

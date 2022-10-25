@@ -1,12 +1,9 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import {
-    capitalizeFirstLetter,
-    useClickOutside,
-    useProductAttributeError,
-} from "../lib/helpers";
-import { updateProductData } from "../lib/queries";
-import { ProductData } from "../lib/types";
+import { capitalizeFirstLetter } from "../../lib/helpers";
+import { useClickOutside, useProductAttributeError } from "../../lib/hooks";
+import { updateProductData } from "../../lib/queries";
+import { ProductData } from "../../lib/types";
 
 interface ProductTitleAttributes {
     id: number;

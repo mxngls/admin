@@ -5,15 +5,12 @@ import toast from "react-hot-toast";
 import {
     deleteImage,
     deleteImageData,
-    fetchImageData,
     fetchImage,
-    unsetMainImage,
-    upDataImageData,
     toggleMainImage,
-} from "../lib/queries";
-import { ImageData } from "../lib/types";
+} from "../../lib/queries";
+import { ImageData } from "../../lib/types";
 import { SleeperChair } from "iconoir-react";
-import { supabase } from "../lib/client";
+import { supabase } from "../../lib/client";
 
 interface ProductImageAttributes {
     imageId: number;
