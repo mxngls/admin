@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 import Button from "../../Components/shared/Button";
 
 export default function LoginPage() {
-    const emailRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const router = useRouter();
+    const emailRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         setEmail(emailRef.current?.value!);
@@ -19,17 +19,10 @@ export default function LoginPage() {
         event: React.FormEvent<HTMLFormElement>
     ) => {
         event.preventDefault();
-        console.log("submitted");
         try {
             const { error } = await supabase.auth.signIn(
-                {
-                    email: email,
-                    password: password,
-                },
-                {
-                    shouldCreateUser: false,
-                    redirectTo: "http://localhost:3000/admin/product/1",
-                }
+                { email: email, password: password },
+                { shouldCreateUser: false }
             );
 
             if (error) {
@@ -51,42 +44,40 @@ export default function LoginPage() {
     };
 
     return (
-        <main>
-            <div>
-                <form
-                    className="flex w-fit flex-col items-center justify-center text-sm sm:text-base"
-                    onSubmit={handleOnSubmit}
-                >
-                    <label className="block">
-                        <span className="block text-base font-medium text-slate-700">
-                            E-Mail
-                        </span>
-                        <input
-                            ref={emailRef}
-                            type="email"
-                            className="focus:border-1 mt-1 mb-2 block w-60 rounded-md border border-solid border-slate-300 px-2 py-3 text-base font-medium text-slate-700 placeholder-slate-400 shadow-sm autofill:text-sm autofill:font-medium invalid:border-pink-500 invalid:text-pink-600 focus:border-slate-700 focus:outline-none focus:ring-1 focus:ring-slate-700 focus:invalid:border-2 focus:invalid:border-pink-500"
-                            placeholder="my@email.com"
-                            value={email}
-                            onChange={handleOnChangeEmail}
-                        ></input>
-                    </label>
-                    <label className="block">
-                        <span className="block text-base font-medium text-slate-700">
-                            Password
-                        </span>
-                        <input
-                            ref={passwordRef}
-                            type="password"
-                            className="focus:border-1 mt-1 mb-2 block w-60 rounded-md border border-solid border-slate-300 px-2 py-3 text-base font-medium text-slate-700 placeholder-slate-400 shadow-sm autofill:text-sm autofill:font-medium invalid:border-pink-500 invalid:text-pink-600 focus:border-slate-700 focus:outline-none focus:ring-1 focus:ring-slate-700 focus:invalid:border-2 focus:invalid:border-pink-500"
-                            value={password}
-                            onChange={handleOnChangePassword}
-                        ></input>
-                    </label>
-                    <div className="mt-7">
-                        <Button type="submit" content={"Submit"} />
-                    </div>
-                </form>
-            </div>
-        </main>
+        <div>
+            <form
+                className="flex w-fit flex-col items-center justify-center text-sm sm:text-base"
+                onSubmit={handleOnSubmit}
+            >
+                <label className="block">
+                    <span className="block text-base font-medium text-slate-700">
+                        E-Mail
+                    </span>
+                    <input
+                        ref={emailRef}
+                        type="email"
+                        className="focus:border-1 mt-1 mb-2 block w-60 rounded-md border border-solid border-slate-300 px-2 py-3 text-base font-medium text-slate-700 placeholder-slate-400 shadow-sm autofill:text-sm autofill:font-medium invalid:border-pink-500 invalid:text-pink-600 focus:border-slate-700 focus:outline-none focus:ring-1 focus:ring-slate-700 focus:invalid:border-2 focus:invalid:border-pink-500"
+                        placeholder="my@email.com"
+                        value={email}
+                        onChange={handleOnChangeEmail}
+                    ></input>
+                </label>
+                <label className="block">
+                    <span className="block text-base font-medium text-slate-700">
+                        Password
+                    </span>
+                    <input
+                        ref={passwordRef}
+                        type="password"
+                        className="focus:border-1 mt-1 mb-2 block w-60 rounded-md border border-solid border-slate-300 px-2 py-3 text-base font-medium text-slate-700 placeholder-slate-400 shadow-sm autofill:text-sm autofill:font-medium invalid:border-pink-500 invalid:text-pink-600 focus:border-slate-700 focus:outline-none focus:ring-1 focus:ring-slate-700 focus:invalid:border-2 focus:invalid:border-pink-500"
+                        value={password}
+                        onChange={handleOnChangePassword}
+                    ></input>
+                </label>
+                <div className="mt-7">
+                    <Button type="submit" content={"Submit"} />
+                </div>
+            </form>
+        </div>
     );
 }
