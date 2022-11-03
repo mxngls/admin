@@ -29,7 +29,7 @@ export default function LoginPage() {
                 throw error;
             }
 
-            router.push("/admin/product/1", "/admin/product/1");
+            router.push("/admin/products", "/admin/products");
         } catch (error: any) {
             console.log("error", error.message);
         }
@@ -75,7 +75,9 @@ export default function LoginPage() {
                     ></input>
                 </label>
                 <div className="mt-7">
-                    <Button type="submit" content={"Submit"} />
+                    <Button type="submit">
+                        <span>Login</span>
+                    </Button>
                 </div>
             </form>
         </div>
