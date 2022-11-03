@@ -3,13 +3,14 @@ import { ProductData } from "./types";
 import { ImageData } from "./types";
 
 async function fetchProductData(id: string): Promise<ProductData | null> {
+        if (error) throw new Error(error.message);
     try {
         const { data, error } = await supabase
             .from("products")
             .select()
             .eq("primary", id)
             .single();
-        if (error) throw error;
+        if (error) throw new Error(error.message);
         return data;
     } catch (error: any) {
         console.log("error", error.message);
@@ -28,7 +29,7 @@ async function updateProductData(
             .update({ [column.toLocaleLowerCase()]: value })
             .match({ primary: id })
             .single();
-        if (error) throw error;
+        if (error) throw new Error(error.message);
         return data;
     } catch (error: any) {
         console.log("error", error.message);
@@ -40,6 +41,7 @@ async function fetchProductTypes() {
     try {
         const { data, error } = await supabase.rpc("get_product_types");
         if (error) throw error;
+        if (error) throw new Error(error.message);
         return data;
     } catch (error: any) {
         console.log("error", error.message);
@@ -56,7 +58,7 @@ async function fetchImageData(
             .select("*")
             .eq("product_id", id)
             .order("primary", { ascending: true });
-        if (error) throw error;
+        if (error) throw new Error(error.message);
         return data;
     } catch (error: any) {
         console.log("error", error.message);
@@ -69,7 +71,7 @@ async function fetchImage(filepath: string): Promise<Blob | null> {
         const { data, error } = await supabase.storage
             .from("content")
             .download(filepath);
-        if (error) throw error;
+        if (error) throw new Error(error.message);
         return data;
     } catch (error: any) {
         console.log("error", error.message);
@@ -96,7 +98,7 @@ const insertImageData = async (
             )
             .select()
             .single();
-        if (error) throw error;
+        if (error) throw new Error(error.message);
         return data;
     } catch (error: any) {
         console.log("error", error.message);
@@ -111,7 +113,7 @@ const deleteImageData = async (filepath: string): Promise<ImageData> => {
             .delete()
             .eq("filepath", filepath)
             .single();
-        if (error) throw error;
+        if (error) throw new Error(error.message);
         return data;
     } catch (error: any) {
         console.log("error", error.message);
@@ -129,7 +131,7 @@ const upDataImageData = async (
             .from("image_urls")
             .update({ [column]: value })
             .eq("primary", imageId);
-        if (error) throw error;
+        if (error) throw new Error(error.message);
     } catch (error: any) {
         console.log("error", error.message);
         return error;
@@ -181,9 +183,7 @@ const uploadImage = async (file: File, filename: string) => {
         const { error } = await supabase.storage
             .from("content")
             .upload(`images/${filename}`, file, { upsert: true });
-        if (error) {
-            throw error;
-        }
+        if (error) throw new Error(error.message);
     } catch (error: any) {
         console.log("error", error.message);
         return error;
