@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { RemoveSquare } from "iconoir-react";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import {
@@ -7,10 +6,9 @@ import {
     deleteImageData,
     fetchImage,
     toggleMainImage,
-} from "../../lib/queries";
-import { ImageData } from "../../lib/types";
-import { SleeperChair } from "iconoir-react";
-import { supabase } from "../../lib/client";
+} from "../../../lib/queries";
+import { ImageData } from "../../../lib/types";
+import { SleeperChair, RemoveSquare } from "iconoir-react";
 
 interface ProductImageAttributes {
     imageId: number;
