@@ -16,9 +16,14 @@ interface AttributeProps {
     id: number;
     column: string;
     value: string | number;
-    type: string | number;
+    type: "string" | "number";
     setProduct: Dispatch<SetStateAction<ProductData>>;
 }
+
+const formatValue = (value: string | number) => {
+    const formatted = new Intl.NumberFormat("ko-KR").format(value as number);
+    return formatted;
+};
 
 export default function ProductAttribute({
     id,
@@ -38,12 +43,12 @@ export default function ProductAttribute({
 
     let err = useProductAttributeError(content, type);
 
-    const containerRef: React.RefObject<HTMLDivElement> = useClickOutside(
-        () => {
+    const containerRef: React.RefObject<HTMLDivElement> &
+        React.RefObject<HTMLInputElement> &
+        React.RefObject<HTMLTextAreaElement> = useClickOutside(() => {
         setIsEdit(false);
         setContent(value);
-        }
-    );
+    });
 
     useEffect(() => {
         setContent(value);
@@ -66,9 +71,11 @@ export default function ProductAttribute({
     };
 
     const handleChangeContent = (
-        event: React.ChangeEvent<HTMLTextAreaElement>
+        event:
+            | React.ChangeEvent<HTMLTextAreaElement>
+            | React.ChangeEvent<HTMLInputElement>
     ) => {
-        if (Number(event.target.value)) {
+        if (type === "number") {
             setContent(Number(event.target.value));
         } else {
             setContent(event.target.value);
@@ -123,7 +130,9 @@ export default function ProductAttribute({
                         height: contentHeight?.height,
                     }}
                 >
+                    {type === "string" ? (
                         <textarea
+                            ref={containerRef}
 
                             onKeyDown={submitOnEnter}
                             name="editProductPttribute"
@@ -139,6 +148,26 @@ export default function ProductAttribute({
                                 "border-pink-500 text-pink-600 focus:border-[1px] focus:border-pink-500"
                             } invalid:border-pink-500 invalid:text-pink-600 focus:rounded focus:border-[1px] focus:border-slate-700 focus:p-[11px] focus:invalid:border-2 focus:invalid:border-pink-500`}
                         ></textarea>
+                    ) : (
+                        <input
+                            ref={containerRef}
+                            style={{
+                                maxWidth: contentHeight?.width,
+                                height: contentHeight?.height,
+                            }}
+                            autoFocus={true}
+                            required={true}
+                            type={"number"}
+                            value={content}
+                            onChange={(
+                                event: React.ChangeEvent<HTMLInputElement>
+                            ) => handleChangeContent(event)}
+                            className={`h-[100%] w-[100%] resize-none p-[15px] text-slate-700 outline-none placeholder:text-slate-400 ${
+                                err.isErr &&
+                                "border-pink-500 text-pink-600 focus:border-[1px] focus:border-pink-500"
+                            } invalid:border-pink-500 invalid:text-pink-600 focus:rounded focus:border-[1px] focus:border-slate-700 focus:p-[11px] focus:invalid:border-2 focus:invalid:border-pink-500`}
+                        />
+                    )}
                     {err.isErr && (
                         <span className="text-pink-600">{err.message}</span>
                     )}
@@ -156,7 +185,15 @@ export default function ProductAttribute({
                     className=" whitespace-pre-line rounded border-[1px] border-slate-200 bg-white p-[11px] text-slate-400 transition-all duration-75 ease-in-out hover:cursor-default focus:border-slate-700 focus:ring-1 focus:ring-slate-700 sm:w-[70%]"
                     onClick={handleOnClick}
                 >
-                    {!!value ? value : <span>{`insert ${column}`}</span>}
+                    {!!value ? (
+                        type === "number" ? (
+                            formatValue(value)
+                        ) : (
+                            value
+                        )
+                    ) : (
+                        <span>{`insert ${column}`}</span>
+                    )}
                 </div>
             </div>
         );
