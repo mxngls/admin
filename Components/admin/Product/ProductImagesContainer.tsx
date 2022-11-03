@@ -1,8 +1,8 @@
 import ProductImage from "./ProductImage";
-import Button from "../shared/Button";
+import Button from "../../shared/Button";
 import { Dispatch, SetStateAction } from "react";
 
-import { ImageData } from "../../lib/types";
+import { ImageData } from "../../../lib/types";
 
 interface ProductImagesContainerAttributes {
     productId: number;
@@ -18,7 +18,7 @@ export default function ProductImagesContainer({
     setImages,
 }: ProductImagesContainerAttributes) {
     return (
-        <div className="mt-7 mb-7 grid grid-flow-row auto-rows-fr grid-cols-2 place-items-stretch justify-items-stretch gap-5 text-sm transition-all duration-500 ease-linear sm:grid-cols-3 sm:text-base">
+        <div className="my-7 pb-7 border-b-2 border-slate-200 grid grid-flow-row auto-rows-fr grid-cols-2 place-items-stretch justify-items-stretch gap-5 text-sm transition-all duration-500 ease-linear xs:grid-cols-3 sm:text-base">
             {!!images &&
                 images.map((image, index) => (
                     <ProductImage
@@ -30,12 +30,10 @@ export default function ProductImagesContainer({
                         isMain={image.main}
                     />
                 ))}
-            <div className="shadow-slate-9000 flex items-center justify-center place-self-stretch rounded border-2 border-dashed border-slate-400 transition-opacity duration-500 ease-linear">
-                <Button
-                    type={"button"}
-                    onClickHandler={handleOnClick}
-                    content={"Add Image"}
-                />
+            <div className="flex min-w-[21%] items-center justify-center place-self-stretch rounded border-2 border-dashed border-slate-400 transition-opacity duration-500 ease-linear before:pt-[100%]">
+                <Button type={"button"} onClickHandler={handleOnClick}>
+                    <span>Add Image</span>
+                </Button>
             </div>
         </div>
     );
