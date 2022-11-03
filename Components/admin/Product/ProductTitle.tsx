@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { capitalizeFirstLetter } from "../../lib/helpers";
-import { useClickOutside, useProductAttributeError } from "../../lib/hooks";
-import { updateProductData } from "../../lib/queries";
-import { ProductData } from "../../lib/types";
+import { capitalizeFirstLetter } from "../../../lib/helpers";
+import { useClickOutside, useProductAttributeError } from "../../../lib/hooks";
+import { updateProductData } from "../../../lib/queries";
+import { ProductData } from "../../../lib/types";
 
 interface ProductTitleAttributes {
     id: number;
@@ -74,7 +74,7 @@ export default function ProductTitle({
 
     if (isEdit) {
         return (
-            <div className="h-24" ref={containerRef}>
+            <div ref={containerRef}>
                 <form className="" onSubmit={handleSubmit} ref={formRef}>
                     <input
                         type={"text"}
@@ -85,12 +85,11 @@ export default function ProductTitle({
                             event: React.ChangeEvent<HTMLInputElement>
                         ) => handleChangeContent(event)}
                         spellCheck={false}
-                        className={`mb-2 box-border h-[78px] w-full pb-[18px] text-6xl font-semibold text-slate-700 outline-none focus:pb-4 
+                        className={`box-border h-[78px] w-full border-b-2 border-solid border-slate-200 pb-[18px] text-6xl font-semibold text-slate-700 outline-none invalid:border-pink-500 invalid:text-pink-600 focus:pb-4 focus:invalid:border-pink-500                         
                         ${
                             err.isErr &&
                             "border-pink-500 text-pink-600 focus:border-b-2 focus:border-pink-500"
-                        } 
-                        invalid:border-pink-500 invalid:text-pink-600 focus:border-b-2 focus:border-slate-700 focus:invalid:border-b-2 focus:invalid:border-pink-500`}
+                        } `}
                     ></input>
                     {err.isErr && (
                         <span className="text-pink-600">{err.message}</span>
@@ -100,9 +99,9 @@ export default function ProductTitle({
         );
     } else
         return (
-            <div className="h-24" ref={containerRef}>
+            <div ref={containerRef}>
                 <h1
-                    className="mb-2 box-border h-[78px] w-full pb-[18px] text-6xl text-slate-400 transition-all duration-75 ease-in hover:border-b-2 hover:border-solid hover:border-slate-400"
+                    className="mb-2 box-border h-[78px] w-full border-b-2 border-solid border-slate-200 pb-[18px] text-6xl text-slate-400 transition-all duration-75 ease-in"
                     onClick={handleOnClick}
                 >
                     {!!name ? (
