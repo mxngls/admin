@@ -41,7 +41,7 @@ export default function Product({ productData, imageData }: Product) {
 
     if (product) {
         return (
-            <div className="text-sm sm:text-base">
+            <div className="my-16 text-lg sm:mx-auto sm:text-base md:max-w-[90%] lg:max-w-[75%] xl:max-w-[62%] 2xl:max-w-[50%]">
                 <ProductTitle
                     id={product.id}
                     name={product.name}
@@ -54,6 +54,7 @@ export default function Product({ productData, imageData }: Product) {
                     setImages={setImages}
                     handleOnClick={handleOnClick}
                 />
+                <div className="border-[1px] border-slate-200 bg-slate-50 p-10">
                 {Object.keys(product).map((key: string, index: number) => {
                     if (key !== "id" && key !== "primary") {
                         return (
