@@ -5,16 +5,16 @@ const useClickOutside = <T extends HTMLElement>(handler: Function) => {
     const domNode = useRef<T>(null);
 
     useEffect(() => {
-        const effectHandler = (e: Event) => {
-            if (!domNode.current?.contains(e.target as Node)) {
+        const handleMouseDown = (e: Event) => {
+            if (domNode.current && !domNode.current.contains(e.target as Node)) {
                 handler();
             }
         };
 
-        document.addEventListener("mousedown", effectHandler);
+        document.addEventListener("mousedown", handleMouseDown);
 
         return () => {
-            document.removeEventListener("mousedown", effectHandler);
+            document.removeEventListener("mousedown", handleMouseDown);
         };
     });
 
