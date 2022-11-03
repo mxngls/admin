@@ -6,7 +6,7 @@ export interface ProductData {
     designer: string;
     type: string;
     category: string;
-    description: string;
+    description?: string;
     pieces: number;
     price: number;
     id: number;
@@ -15,7 +15,7 @@ export interface ProductData {
 export interface ImageData {
     filepath: string;
     main: Boolean;
-    id: number;
+    product_id: number;
     primary: number;
 }
 
