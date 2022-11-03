@@ -110,26 +110,21 @@ export default function ProductAttribute({
 
     if (isEdit) {
         return (
-            <div>
-                <h4 className="transit my-3 border-b border-solid border-slate-400 p-0 pb-1">
+            <div className="mb-6 sm:flex sm:content-between sm:items-baseline">
+                <h4 className="mt-4 mb-2 pb-1 sm:mr-[5%] sm:w-[25%]">
                     {title}
                 </h4>
                 <form
-                    className="flex flex-col justify-between"
+                    className="flex flex-col justify-between sm:w-[70%]"
                     onSubmit={handleSubmit}
                     ref={formRef}
-                >
-                    <div
-                        /* Add inline style to conditionally adjust the size of the <textarea> element according 
-                        the corresponding content <div>. Conditional styling of that sort is not natively possible
-                        with tailwind.css */
-                        ref={containerRef}
                     style={{
                         maxWidth: contentHeight?.width,
                         height: contentHeight?.height,
                     }}
                 >
                         <textarea
+
                             onKeyDown={submitOnEnter}
                             name="editProductPttribute"
                             required={true}
@@ -139,12 +134,11 @@ export default function ProductAttribute({
                                 event: React.ChangeEvent<HTMLTextAreaElement>
                             ) => handleChangeContent(event)}
                             spellCheck={false}
-                            className={`h-[100%] w-[100%] resize-none p-[16px] text-lg text-slate-700 outline-none placeholder:text-slate-400 ${
+                            className={`h-[100%] w-[100%] resize-none p-[15px] text-slate-700 outline-none placeholder:text-slate-400 ${
                                 err.isErr &&
-                                "border-pink-500 text-pink-600 focus:border-2 focus:border-pink-500"
-                            } invalid:border-pink-500 invalid:text-pink-600 focus:rounded focus:border-2 focus:border-slate-700 focus:p-[10px] focus:invalid:border-2 focus:invalid:border-pink-500`}
+                                "border-pink-500 text-pink-600 focus:border-[1px] focus:border-pink-500"
+                            } invalid:border-pink-500 invalid:text-pink-600 focus:rounded focus:border-[1px] focus:border-slate-700 focus:p-[11px] focus:invalid:border-2 focus:invalid:border-pink-500`}
                         ></textarea>
-                    </div>
                     {err.isErr && (
                         <span className="text-pink-600">{err.message}</span>
                     )}
@@ -153,13 +147,13 @@ export default function ProductAttribute({
         );
     } else
         return (
-            <div>
-                <h4 className="my-3 border-b border-solid border-slate-400 pb-1 ">
+            <div className="mb-6 sm:flex sm:content-between sm:items-baseline">
+                <h4 className="mt-4 mb-2 pb-1 text-slate-400 sm:mr-[5%] sm:w-[25%]">
                     {title}
                 </h4>
                 <div
                     ref={containerRef}
-                    className="whitespace-pre-line p-[12px] text-lg text-slate-400 transition-all duration-75 ease-in-out hover:cursor-default hover:rounded hover:border-2 hover:border-solid hover:border-slate-400 hover:p-[10px] focus:border-slate-700 focus:ring-1 focus:ring-slate-700"
+                    className=" whitespace-pre-line rounded border-[1px] border-slate-200 bg-white p-[11px] text-slate-400 transition-all duration-75 ease-in-out hover:cursor-default focus:border-slate-700 focus:ring-1 focus:ring-slate-700 sm:w-[70%]"
                     onClick={handleOnClick}
                 >
                     {!!value ? value : <span>{`insert ${column}`}</span>}
