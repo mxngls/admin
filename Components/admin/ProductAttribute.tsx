@@ -5,11 +5,12 @@ import React, {
     Dispatch,
     useRef,
 } from "react";
-import { capitalizeFirstLetter } from "../../lib/helpers";
-import { useClickOutside, useProductAttributeError } from "../../lib/hooks";
-import { ProductData } from "../../lib/types";
+import { capitalizeFirstLetter } from "../../../lib/helpers";
+import { useClickOutside, useProductAttributeError } from "../../../lib/hooks";
+import { ProductData } from "../../../lib/types";
 import toast from "react-hot-toast";
-import { updateProductData } from "../../lib/queries";
+import { updateProductData } from "../../../lib/queries";
+import { number } from "prop-types";
 
 interface AttributeProps {
     id: number;
@@ -39,8 +40,8 @@ export default function ProductAttribute({
 
     const containerRef: React.RefObject<HTMLDivElement> = useClickOutside(
         () => {
-            setIsEdit(false);
-            setContent(value);
+        setIsEdit(false);
+        setContent(value);
         }
     );
 
@@ -123,11 +124,11 @@ export default function ProductAttribute({
                         the corresponding content <div>. Conditional styling of that sort is not natively possible
                         with tailwind.css */
                         ref={containerRef}
-                        style={{
-                            maxWidth: contentHeight?.width,
-                            height: contentHeight?.height,
-                        }}
-                    >
+                    style={{
+                        maxWidth: contentHeight?.width,
+                        height: contentHeight?.height,
+                    }}
+                >
                         <textarea
                             onKeyDown={submitOnEnter}
                             name="editProductPttribute"
