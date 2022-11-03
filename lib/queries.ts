@@ -2,13 +2,30 @@ import { supabase } from "./client";
 import { ProductData } from "./types";
 import { ImageData } from "./types";
 
-async function fetchProductData(id: string): Promise<ProductData | null> {
+async function fetchProductsData(
+    colums?: string
+): Promise<ProductData[] | null> {
+    try {
+        const { data, error } = await supabase
+            .from("products")
+            .select(colums)
+            .order("id");
         if (error) throw new Error(error.message);
+        return data;
+    } catch (error: any) {
+        console.log("error", error.message);
+        return error;
+    }
+}
+
+async function fetchProductData(
+    id: string
+): Promise<ProductData | null | Error> {
     try {
         const { data, error } = await supabase
             .from("products")
             .select()
-            .eq("primary", id)
+            .eq("id", id)
             .single();
         if (error) throw new Error(error.message);
         return data;
@@ -40,7 +57,14 @@ async function updateProductData(
 async function fetchProductTypes() {
     try {
         const { data, error } = await supabase.rpc("get_product_types");
-        if (error) throw error;
+        if (error) throw new Error(error.message);
+        return data;
+    } catch (error: any) {
+        console.log("error", error.message);
+        return error;
+    }
+}
+
 async function fetchMainImageData(): Promise<ImageData[]> {
     try {
         const { data, error } = await supabase
@@ -197,16 +221,18 @@ const uploadImage = async (file: File, filename: string) => {
 };
 
 export {
-    updateProductData,
+    fetchProductsData,
     fetchProductData,
+    updateProductData,
     fetchProductTypes,
-    fetchImageData,
     fetchImage,
+    deleteImage,
+    uploadImage,
+    fetchMainImageData,
+    fetchImageData,
     insertImageData,
     deleteImageData,
     upDataImageData,
     unsetMainImage,
-    deleteImage,
-    uploadImage,
     toggleMainImage,
 };
