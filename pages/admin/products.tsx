@@ -23,7 +23,7 @@ export default function Products({
 }
 
 export async function getServerSideProps() {
-    const columns = "id,name,designer,type,category,pieces,pricee";
+    const columns = "id,name,designer,type,category,pieces,price";
     const colArr = columns.split(",");
     const productsData = await fetchProductsData(columns);
     const mainImagesData = await fetchMainImageData();
