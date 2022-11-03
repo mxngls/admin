@@ -92,11 +92,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const productData = await fetchProductData(id);
     const imageData = await fetchImageData(id);
 
-    if (productData && imageData) {
+    if (productData instanceof Error || imageData instanceof Error) {
+        return { notFound: true };
+    } else {
         return {
             props: { productData, imageData },
         };
-    } else {
-        return { notFound: true };
     }
 };
