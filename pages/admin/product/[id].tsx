@@ -49,26 +49,27 @@ export default function Product({ productData, imageData }: Product) {
                     handleOnClick={handleOnClick}
                 />
                 <div className="border-[1px] border-slate-200 bg-slate-50 p-10">
-                {Object.keys(product).map((key: string, index: number) => {
-                    if (key !== "id" && key !== "primary") {
-                        return (
-                            <ProductAttribute
-                                key={index}
-                                id={product.id}
-                                column={key}
-                                value={product[key as keyof ProductData]}
-                                type={
-                                    key === "pieces"
-                                        ? "number"
-                                        : key === "price"
-                                        ? "number"
-                                        : "string"
-                                }
-                                setProduct={setProduct}
-                            />
-                        );
-                    }
-                })}
+                    {Object.keys(product).map((key: string, index: number) => {
+                        if (key !== "id" && key !== "primary") {
+                            return (
+                                <ProductAttribute
+                                    key={index}
+                                    id={product.id}
+                                    column={key}
+                                    value={product[key as keyof ProductData]!}
+                                    type={
+                                        key === "pieces"
+                                            ? "number"
+                                            : key === "price"
+                                            ? "number"
+                                            : "string"
+                                    }
+                                    setProduct={setProduct}
+                                />
+                            );
+                        }
+                    })}
+                </div>
                 <ImageUploadDialog
                     images={images}
                     setImages={setImages}
