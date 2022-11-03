@@ -1,18 +1,12 @@
 import { GetServerSideProps } from "next";
-import React, { useEffect, useState } from "react";
-import ProductAttribute from "../../../Components/admin/ProductAttribute";
-import ImageUploadDialog from "../../../Components/admin/ImageUploadDialog";
+import React, { useState } from "react";
+import ProductAttribute from "../../../Components/admin/Product/ProductAttribute";
+import ImageUploadDialog from "../../../Components/admin/Product/ImageUploadDialog";
 import { Toaster } from "react-hot-toast";
-import ProductImagesContainer from "../../../Components/admin/ProductImagesContainer";
-import ProductTitle from "../../../Components/admin/ProductTitle";
-import {
-    fetchImageData,
-    fetchProductData,
-    fetchProductTypes,
-} from "../../../lib/queries";
+import ProductImagesContainer from "../../../Components/admin/Product/ProductImagesContainer";
+import ProductTitle from "../../../Components/admin/Product/ProductTitle";
+import { fetchImageData, fetchProductData } from "../../../lib/queries";
 import { ImageData, ProductData } from "../../../lib/types";
-import { capitalizeFirstLetter } from "../../../lib/helpers";
-import { supabase } from "../../../lib/client";
 
 interface Product {
     productData: ProductData;
