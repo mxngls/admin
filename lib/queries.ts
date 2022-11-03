@@ -41,6 +41,12 @@ async function fetchProductTypes() {
     try {
         const { data, error } = await supabase.rpc("get_product_types");
         if (error) throw error;
+async function fetchMainImageData(): Promise<ImageData[]> {
+    try {
+        const { data, error } = await supabase
+            .from("image_urls")
+            .select("*")
+            .match({ main: true });
         if (error) throw new Error(error.message);
         return data;
     } catch (error: any) {
