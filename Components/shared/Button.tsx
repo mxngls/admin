@@ -3,11 +3,15 @@ import React from "react";
 
 interface ButtonProps {
     onClickHandler?: React.MouseEventHandler<HTMLButtonElement>;
-    content: string;
     type: "button" | "submit" | "reset";
+    children?: JSX.Element | JSX.Element[];
 }
 
-export default function Button({ onClickHandler, content, type }: ButtonProps) {
+export default function Button({
+    onClickHandler,
+    type,
+    children,
+}: ButtonProps) {
     if (type === "button") {
         return (
             <button
@@ -15,7 +19,7 @@ export default function Button({ onClickHandler, content, type }: ButtonProps) {
                 className="box-border h-11 w-fit rounded-md bg-slate-900 px-6 py-3 text-sm font-medium text-slate-50 shadow-sm hover:bg-slate-800"
                 onClick={onClickHandler}
             >
-                {content}
+                {children}
             </button>
         );
     } else {
@@ -24,7 +28,7 @@ export default function Button({ onClickHandler, content, type }: ButtonProps) {
                 type={type}
                 className="box-border h-11 w-fit rounded-md bg-slate-900 px-6 py-3 text-sm font-medium text-slate-50 shadow-sm hover:bg-slate-800"
             >
-                {content}
+                {children}
             </button>
         );
     }
