@@ -5,7 +5,10 @@ import ImageUploadDialog from "../../../Components/admin/Product/ImageUploadDial
 import { Toaster } from "react-hot-toast";
 import ProductImagesContainer from "../../../Components/admin/Product/ProductImagesContainer";
 import ProductTitle from "../../../Components/admin/Product/ProductTitle";
-import { fetchImageData, fetchProductData } from "../../../lib/queries";
+import {
+    fetchImageData,
+    fetchProductData,
+} from "../../../lib/queries";
 import { ImageData, ProductData } from "../../../lib/types";
 
 interface Product {
@@ -49,26 +52,26 @@ export default function Product({ productData, imageData }: Product) {
                     handleOnClick={handleOnClick}
                 />
                 <div className="border-[1px] border-slate-200 bg-slate-50 p-10">
-                    {Object.keys(product).map((key: string, index: number) => {
-                        if (key !== "id" && key !== "primary") {
-                            return (
-                                <ProductAttribute
-                                    key={index}
-                                    id={product.id}
-                                    column={key}
-                                    value={product[key as keyof ProductData]!}
-                                    type={
-                                        key === "pieces"
-                                            ? "number"
-                                            : key === "price"
-                                            ? "number"
-                                            : "string"
-                                    }
-                                    setProduct={setProduct}
-                                />
-                            );
-                        }
-                    })}
+                {Object.keys(product).map((key: string, index: number) => {
+                    if (key !== "id" && key !== "primary") {
+                        return (
+                            <ProductAttribute
+                                key={index}
+                                id={product.id}
+                                column={key}
+                                value={product[key as keyof ProductData]!}
+                                type={
+                                    key === "pieces"
+                                        ? "number"
+                                        : key === "price"
+                                        ? "number"
+                                        : "string"
+                                }
+                                setProduct={setProduct}
+                            />
+                        );
+                    }
+                })}
                 </div>
                 <ImageUploadDialog
                     images={images}

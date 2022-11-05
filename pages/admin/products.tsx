@@ -14,11 +14,11 @@ export default function Products({
     colArr,
 }: Products) {
     return (
-            <ProductTable
-                productData={productsData}
-                mainImagesData={mainImagesData}
-                colArr={colArr}
-            />
+        <ProductTable
+            productData={productsData}
+            mainImagesData={mainImagesData}
+            colArr={colArr}
+        />
     );
 }
 
