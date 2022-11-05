@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import ColumnList from "./ColumnList";
 import { NavArrowDown } from "iconoir-react";
 import ActiveRule from "./ActiveRule";
@@ -23,14 +23,26 @@ export default function SortPopupContainer({
 }: SortPopupContainerProps) {
     const [showColumnList, setShowColumnList] = useState<boolean>(false);
 
+    const addRule = (column: string) => {
+        setSortRules((current) => [
+            ...current,
+            {
+                column: column,
+                ascending: true,
+            },
+        ]);
+    };
+
     return (
         <div
-            className={`absolute mt-2 flex-row items-center overflow-visible whitespace-nowrap border-[1px] border-slate-200 bg-slate-50 px-2`}
+            className={`absolute mt-2 flex-row items-center overflow-visible whitespace-nowrap rounded border-[1px] border-slate-200 bg-slate-50 px-2`}
         >
             <div>
-                <div className="flex min-h-[3rem] min-w-full flex-col justify-center items-center border-b-[1px] border-slate-200 py-1">
+                <div className="flex min-h-[3rem] min-w-full flex-col items-center justify-center border-b-[1px] border-slate-200 py-1">
                     {sortRules.length === 0 ? (
-                        <span className="ml-2 self-start place-self-center  text-left">No rules applied</span>
+                        <span className="ml-2 place-self-center self-start  text-left">
+                            No rules applied
+                        </span>
                     ) : (
                         sortRules.map((rule, index) => {
                             // console.log(rule, index);
@@ -64,6 +76,7 @@ export default function SortPopupContainer({
                         setShowColumnList={setShowColumnList}
                         sortRules={sortRules}
                         setSortRules={setSortRules}
+                        onClickHandler={addRule}
                     />
                 )}
             </div>
