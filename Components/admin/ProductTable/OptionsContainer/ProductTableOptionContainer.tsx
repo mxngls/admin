@@ -2,7 +2,7 @@ import Button from "../../../shared/Button";
 import { Plus } from "iconoir-react";
 import { Dispatch, SetStateAction } from "react";
 import { useClickOutside } from "../../../../lib/hooks";
-import SortPopupContainer from "./SortPopup";
+import SortPopupContainer from "./SortPopupContainer";
 import SortButton from "./SortButton";
 import FilterButton from "./FilterButton";
 import SortRule from "./SortButton";
