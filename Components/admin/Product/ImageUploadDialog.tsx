@@ -16,7 +16,7 @@ interface ImageUploadDialogProps {
     setImages: Dispatch<SetStateAction<ImageData[]>>;
     openDialog: Boolean;
     setOpenDialog: Dispatch<SetStateAction<Boolean>>;
-    id: number;
+    productId: string;
 }
 
 export default function ImageUploadDialog({
@@ -24,7 +24,7 @@ export default function ImageUploadDialog({
     setImages,
     openDialog,
     setOpenDialog,
-    id,
+    productId,
 }: ImageUploadDialogProps) {
     const [fileName, setFileName] = useState<string>("");
     const [file, setFile] = useState<File | null>(null);
@@ -73,9 +73,9 @@ export default function ImageUploadDialog({
                 uploadImage(file, fileName)
                     .then(() => {
                         if (images.length > 0) {
-                            return insertImageData(id, fileName);
+                            return insertImageData(productId, fileName);
                         } else {
-                            return insertImageData(id, fileName, true);
+                            return insertImageData(productId, fileName, true);
                         }
                     })
                     .then((images) =>

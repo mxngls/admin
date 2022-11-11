@@ -22,7 +22,7 @@ export default function ProductTableBody({
                         key={index + "row"}
                         productData={product}
                         index={index}
-                        mainImage={mainImages[product.id]}
+                        mainImage={mainImages[product.product_id]}
                     />
                 );
             })}

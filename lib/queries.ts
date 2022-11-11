@@ -9,7 +9,7 @@ async function fetchProductsData(
         const { data, error } = await supabase
             .from("products")
             .select(colums)
-            .order("id");
+            .order("product_id");
         if (error) throw new Error(error.message);
         return data;
     } catch (error: any) {
@@ -19,13 +19,14 @@ async function fetchProductsData(
 }
 
 async function fetchProductData(
-    id: string
-): Promise<ProductData | null | Error> {
+    product_id: string,
+    columns?: string
+): Promise<ProductData | Error> {
     try {
         const { data, error } = await supabase
             .from("products")
-            .select()
-            .eq("id", id)
+            .select(columns)
+            .eq("product_id", product_id)
             .single();
         if (error) throw new Error(error.message);
         return data;
@@ -38,13 +39,13 @@ async function fetchProductData(
 async function updateProductData(
     column: string,
     value: string | number,
-    id: number
-): Promise<ProductData | null> {
+    product_id: string
+): Promise<ProductData | Error> {
     try {
         const { data, error } = await supabase
             .from("products")
             .update({ [column.toLocaleLowerCase()]: value })
-            .match({ primary: id })
+            .eq("product_id", product_id)
             .single();
         if (error) throw new Error(error.message);
         return data;
@@ -79,14 +80,12 @@ async function fetchMainImageData(): Promise<ImageData[]> {
     }
 }
 
-async function fetchImageData(
-    id: string | number
-): Promise<ImageData[] | null> {
+async function fetchImageData(product_id: string): Promise<ImageData[] | Error> {
     try {
         const { data, error } = await supabase
             .from("image_urls")
             .select("*")
-            .eq("product_id", id)
+            .eq("product_id", product_id)
             .order("primary", { ascending: true });
         if (error) throw new Error(error.message);
         return data;
@@ -110,7 +109,7 @@ async function fetchImage(filepath: string): Promise<Blob | null> {
 }
 
 const insertImageData = async (
-    id: number,
+    product_id: string,
     fileName: string,
     isMain = false
 ): Promise<ImageData> => {
@@ -120,7 +119,7 @@ const insertImageData = async (
             .from("image_urls")
             .upsert(
                 {
-                    product_id: id,
+                    product_id: product_id,
                     filepath: `images/${fileName}`,
                     main: isMain,
                 },
@@ -183,9 +182,9 @@ const unsetMainImage = async (imageId: number): Promise<void> => {
 
 const toggleMainImage = async (
     imageId: number,
-    productId: number,
+    productId: string,
     isMain: Boolean
-): Promise<ImageData[] | null> => {
+): Promise<ImageData[] | Error> => {
     try {
         const { data, error } = await supabase.rpc("toggle_main_image", {
             image_id: imageId,

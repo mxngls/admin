@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 import { ImageData } from "../../../lib/types";
 
 interface ProductImagesContainerAttributes {
-    productId: number;
+    productId: string;
     handleOnClick: React.MouseEventHandler<HTMLButtonElement>;
     images: ImageData[] | null;
     setImages: Dispatch<SetStateAction<ImageData[]>>;

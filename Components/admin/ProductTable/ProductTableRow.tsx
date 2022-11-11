@@ -17,7 +17,7 @@ export default function ProductTableRow({
 }: ProductRow) {
     const router = useRouter();
     const handleOnClick = () => {
-        router.push(`/admin/product/${productData.id}`);
+        router.push(`/admin/product/${productData.product_id}`);
     };
 
     return (

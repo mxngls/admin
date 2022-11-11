@@ -6,14 +6,14 @@ import { updateProductData } from "../../../lib/queries";
 import { ProductData } from "../../../lib/types";
 
 interface ProductTitleAttributes {
-    id: number;
+    productId: string;
     name: string;
     type: string | number;
     setProduct: Dispatch<SetStateAction<ProductData>>;
 }
 
 export default function ProductTitle({
-    id,
+    productId,
     name,
     type,
     setProduct,
@@ -60,7 +60,7 @@ export default function ProductTitle({
     ) => {
         event.preventDefault();
         if (!err.isErr) {
-            toast.promise(updateProductData("name", content, id), {
+            toast.promise(updateProductData("name", content, productId), {
                 loading: "Loading...",
                 success: `Updated "${capitalizeFirstLetter("name")}"`,
                 error: (error) => {

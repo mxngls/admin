@@ -9,13 +9,13 @@ export interface ProductData {
     description?: string;
     pieces: number;
     price: number;
-    id: number;
+    product_id: string;
 }
 
 export interface ImageData {
     filepath: string;
     main: Boolean;
-    product_id: number;
+    product_id: string;
     primary: number;
 }
 

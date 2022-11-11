@@ -12,7 +12,7 @@ import { SleeperChair, RemoveSquare } from "iconoir-react";
 
 interface ProductImageAttributes {
     imageId: number;
-    productId: number;
+    productId: string;
     filepath: string;
     setImages: Dispatch<SetStateAction<ImageData[]>>;
     isMain: Boolean;

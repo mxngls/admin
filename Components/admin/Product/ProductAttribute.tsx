@@ -13,7 +13,7 @@ import { updateProductData } from "../../../lib/queries";
 import { number } from "prop-types";
 
 interface AttributeProps {
-    id: number;
+    productId: string;
     column: string;
     value: string | number;
     type: "string" | "number";
@@ -26,7 +26,7 @@ const formatValue = (value: string | number) => {
 };
 
 export default function ProductAttribute({
-    id,
+    productId,
     column,
     value,
     type,
@@ -88,7 +88,7 @@ export default function ProductAttribute({
         event.preventDefault();
         if (!err.isErr) {
             toast.promise(
-                updateProductData(column, content, id).then(() =>
+                updateProductData(column, content, productId).then(() =>
                     setProduct((product) => ({ ...product, [column]: content }))
                 ),
                 {
@@ -133,7 +133,6 @@ export default function ProductAttribute({
                     {type === "string" ? (
                         <textarea
                             ref={containerRef}
-
                             onKeyDown={submitOnEnter}
                             name="editProductPttribute"
                             required={true}

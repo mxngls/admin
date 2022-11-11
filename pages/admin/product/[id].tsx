@@ -40,24 +40,24 @@ export default function Product({ productData, imageData }: Product) {
         return (
             <div className="my-16 text-lg sm:mx-auto sm:text-base md:max-w-[90%] lg:max-w-[75%] xl:max-w-[62%] 2xl:max-w-[50%]">
                 <ProductTitle
-                    id={product.id}
+                    id={product.product_id}
                     name={product.name}
                     type={"string"}
                     setProduct={setProduct}
                 />
                 <ProductImagesContainer
-                    productId={product.id}
+                    productId={product.product_id}
                     images={images}
                     setImages={setImages}
                     handleOnClick={handleOnClick}
                 />
                 <div className="border-[1px] border-slate-200 bg-slate-50 p-10">
                 {Object.keys(product).map((key: string, index: number) => {
-                    if (key !== "id" && key !== "primary") {
+                        if (key !== "product_id") {
                         return (
                             <ProductAttribute
                                 key={index}
-                                id={product.id}
+                                    id={product.product_id}
                                 column={key}
                                 value={product[key as keyof ProductData]!}
                                 type={
@@ -78,7 +78,7 @@ export default function Product({ productData, imageData }: Product) {
                     setImages={setImages}
                     openDialog={openDialog}
                     setOpenDialog={setOpenDialog}
-                    id={product.id}
+                    id={product.product_id}
                 />
                 <Toaster />
             </div>
