@@ -41,7 +41,6 @@ export default function SortPopupContainer({
                         </span>
                     ) : (
                         sortRules.map((rule, index) => {
-                            // console.log(rule, index);
                             return (
                                 <ActiveRule
                                     key={rule.column}

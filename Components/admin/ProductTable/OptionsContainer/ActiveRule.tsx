@@ -17,10 +17,6 @@ export default function ActiveRule({
     setSortPopup,
     setSortRules,
 }: ActiveRuleProps) {
-    // useEffect(() => {
-    //     console.log(rule, index);
-    // })
-
     return (
         <div className="flex min-h-[3rem] min-w-full flex-col items-start justify-start border-b-[1px] border-slate-200 py-2 last:border-none sm:m-0 sm:flex-row sm:items-center sm:border-none">
             <div className="flex items-center justify-start">
@@ -54,9 +50,6 @@ export default function ActiveRule({
                                 console.log("clicked");
                                 setSortRules((current) => [
                                     ...current.map((r, n) => {
-                                        console.log(
-                                            r.column + " | " + rule.column
-                                        );
                                         if (index === n) {
                                             return {
                                                 ...rule,

@@ -16,11 +16,6 @@ import ProductTableBody from "./ProductTableBody";
 
 const sortProducts = (products: ProductData[], sortRules: SortRule[]) => {
     try {
-        // const key = column as keyof ProductData;
-        // Use type assertions as only columns retrieved form the database
-        // are used as keys here. Therefore undefined objects can per definition
-        // not be returned
-
         const sortCallback = (
             rules: SortRule[],
             index: number,
@@ -73,10 +68,6 @@ export default function ProductTable({
     );
 
     useEffect(() => {
-        console.log(sortedProducts);
-    }, [sortedProducts]);
-
-    useEffect(() => {
         const getMainImages = async (mainImagesData: ImageData[]) => {
             mainImagesData.map(async (image) => {
                 if (image) {
@@ -99,10 +90,6 @@ export default function ProductTable({
         };
         getMainImages(mainImagesData);
     }, [mainImagesData]);
-
-    useEffect(() => {
-        console.log(sortRules);
-    }, [sortRules]);
 
     if (products)
         return (

@@ -1,12 +1,5 @@
 import { Filter } from "iconoir-react";
 
-// interface SortButtonProps {
-//     sortRules: { column: string; ascending: boolean };
-//     setSortRules: Dispatch<
-//         SetStateAction<{ column: string; ascending: boolean }>
-//     >;
-//     setSortPopup: Dispatch<SetStateAction<Boolean>>;
-// }
 
 export default function SortButton() {
     return (

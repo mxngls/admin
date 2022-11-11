@@ -15,7 +15,6 @@ export default function SortButton({
             type="button"
             onClick={(e) => {
                 e.stopPropagation();
-                console.log(e.isPropagationStopped());
                 setSortPopup((current) => !current);
             }}
             className={`${

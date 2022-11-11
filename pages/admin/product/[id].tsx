@@ -28,14 +28,6 @@ export default function Product({ productData, imageData }: Product) {
         }
     };
 
-    // TYPE
-    // console.log(
-    //     (async () => {
-    //         const test = await fetchProductTypes();
-    //         return test;
-    //     })()
-    // );
-
     if (product) {
         return (
             <div className="my-16 text-lg sm:mx-auto sm:text-base md:max-w-[90%] lg:max-w-[75%] xl:max-w-[62%] 2xl:max-w-[50%]">
