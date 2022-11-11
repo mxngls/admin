@@ -147,7 +147,9 @@ export default function ImageUploadDialog({
                 >
                     Choose File
                 </button>
-                <Button type="submit" content={"Upload Image"} />
+                <Button type="submit">
+                    <span>{"Upload Image"}</span>
+                </Button>
             </form>
         </dialog>
     );
