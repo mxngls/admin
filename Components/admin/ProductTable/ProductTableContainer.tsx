@@ -60,7 +60,7 @@ const sortProducts = (products: ProductData[], sortRules: SortRule[]) => {
 export default function ProductTable({
     productData,
     mainImagesData,
-    colArr,
+    columnsData,
 }: Products) {
     const [products] = useState<ProductData[]>(productData);
     const [mainImages, setMainImages] = useState<MainImages>({});
@@ -112,7 +112,7 @@ export default function ProductTable({
                 </div>
                 <div className="mt-24 w-full border-separate rounded border-[1px] border-slate-200">
                     <ProductTableOptionsContainer
-                        columns={colArr}
+                        columnsData={columnsData}
                         sortRules={sortRules}
                         setSortRules={setSortRules}
                         sortPopup={sortPopup}
