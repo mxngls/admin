@@ -93,7 +93,7 @@ export default function ProductTable({
 
     if (products)
         return (
-            <div className="flex flex-col items-center justify-center">
+            <div className="mt-20 flex flex-col items-center justify-center">
                 <div className="border-b-2 border-slate-700 pb-6 text-center">
                     <h1>Products</h1>
                 </div>

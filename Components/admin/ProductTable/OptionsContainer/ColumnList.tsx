@@ -37,7 +37,7 @@ export default function ColumnList({
                                         onClickHandler(column);
                                         setShowColumnList(false);
                                     }}
-                        className="block rounded px-4 py-1 text-left hover:bg-slate-200"
+                                    className="block w-full rounded px-4 py-1 text-left hover:bg-slate-200"
                                     key={`col-${index}`}
                                 >
                                     <span>{column}</span>

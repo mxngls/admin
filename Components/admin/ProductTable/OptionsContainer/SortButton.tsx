@@ -27,9 +27,7 @@ export default function SortButton({
                     Sorted
                 </span>
             ) : (
-                <span className="hidden w-12 font-medium sm:block">
-                    {"Sort"}
-                </span>
+                <span className="hidden w-12 font-medium sm:block">Sort</span>
             )}
         </button>
     );

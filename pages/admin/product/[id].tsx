@@ -30,7 +30,7 @@ export default function Product({ productData, imageData }: Product) {
 
     if (product) {
         return (
-            <div className="my-16 text-lg sm:mx-auto sm:text-base md:max-w-[90%] lg:max-w-[75%] xl:max-w-[62%] 2xl:max-w-[50%]">
+            <div className="my-16 text-lg sm:mx-auto sm:text-base md:max-w-[90%] lg:max-w-[75%] xl:max-w-[50%] 2xl:max-w-[40%]">
                 <ProductTitle
                     id={product.product_id}
                     name={product.name}
@@ -43,27 +43,27 @@ export default function Product({ productData, imageData }: Product) {
                     setImages={setImages}
                     handleOnClick={handleOnClick}
                 />
-                <div className="border-[1px] border-slate-200 bg-slate-50 p-10">
-                {Object.keys(product).map((key: string, index: number) => {
+                <div className="rounded border-[1px] border-slate-200 bg-slate-50 p-10">
+                    {Object.keys(product).map((key: string, index: number) => {
                         if (key !== "product_id") {
-                        return (
-                            <ProductAttribute
-                                key={index}
+                            return (
+                                <ProductAttribute
+                                    key={index}
                                     id={product.product_id}
-                                column={key}
-                                value={product[key as keyof ProductData]!}
-                                type={
-                                    key === "pieces"
-                                        ? "number"
-                                        : key === "price"
-                                        ? "number"
-                                        : "string"
-                                }
-                                setProduct={setProduct}
-                            />
-                        );
-                    }
-                })}
+                                    column={key}
+                                    value={product[key as keyof ProductData]!}
+                                    type={
+                                        key === "pieces"
+                                            ? "number"
+                                            : key === "price"
+                                            ? "number"
+                                            : "string"
+                                    }
+                                    setProduct={setProduct}
+                                />
+                            );
+                        }
+                    })}
                 </div>
                 <ImageUploadDialog
                     images={images}
