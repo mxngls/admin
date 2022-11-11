@@ -42,30 +42,124 @@ const sortProducts = (products: ProductData[], sortRules: SortRule[]) => {
                     : sortCallback(rules, index + 1, a, b);
             }
         };
-
-        return products.sort((a, b) => {
-            if (sortRules.length === 0) return a.id - b.id;
+        let copy = products;
+        copy.sort((a, b) => {
+            if (sortRules.length === 0)
+                return a.product_id.localeCompare(b.product_id, "en", {
+                    numeric: true,
+                });
             return sortCallback(sortRules, 0, a, b);
         });
-    } catch (error) {
-        console.log(error);
+        return copy;
+    } catch (error: any) {
+        console.log("error", error.message);
+        return error;
     }
 };
 
-export default function ProductTable({
-    productData,
+const filterProducts = (
+    products: ProductData[],
+    filters: Filter[],
+    columnsData: ColumnsData
+) => {
+    try {
+        const filterCallback = (filters: Filter[], product: ProductData) => {
+            for (let i = 0; i < filters.length; i++) {
+                let value = product[filters[i].column as keyof ProductData];
+                let compare = filters[i].compare;
+                let type = columnsData[filters[i].column].type;
+
+                console.log(value, compare)
+
+                if (type === "string") {
+                    value = (value as string).toLowerCase();
+                    compare = (compare as string).toLowerCase();
+                    const tags = ["en-US", "ko-KR"];
+                    const res = value.localeCompare(compare, tags);
+
+                    switch (filters[i].type) {
+                        case "=":
+                            return res === 0 ? true : false;
+                            break;
+                        case "<>":
+                            return res !== 0 ? true : false;
+                            break;
+                        case ">":
+                            return res > 0 ? true : false;
+                            break;
+                        case "<":
+                            return res < 0 ? true : false;
+                            break;
+                        case ">=":
+                            return res <= 0 ? true : false;
+                            break;
+                        case "<=":
+                            return res >= 0 ? true : false;
+                            break;
+                        case "in":
+                            return value.includes(compare) ? true : false;
+                            break;
+                        default:
+                            return false;
+                    }
+
+                } else if (type === "integer") {
+                    switch (filters[i].type) {
+                        case "=":
+                            return value == compare ? true : false;
+                            break;
+                        case "<>":
+                            return value != compare ? true : false;
+                            break;
+                        case ">":
+                            return value! > compare ? true : false;
+                            break;
+                        case "<":
+                            return value! < compare ? true : false;
+                            break;
+                        case ">=":
+                            return value! >= compare ? true : false;
+                            break;
+                        case "<=":
+                            return value! <= compare ? true : false;
+                            break;
+                        case "in":
+                            return false;
+                            break;
+                        default:
+                            return false;
+                    }
+                }
+            }
+            return true;
+        };
+        return products.filter((product) => filterCallback(filters, product));
+    } catch (error: any) {
+        console.log("error", error.message);
+        return error;
+    }
+};
+
+export default function ProductTableContainer({
+    productsData,
     mainImagesData,
     columnsData,
 }: Products) {
-    const [products] = useState<ProductData[]>(productData);
     const [mainImages, setMainImages] = useState<MainImages>({});
     const [sortRules, setSortRules] = useState<SortRule[]>([]);
     const [sortPopup, setSortPopup] = useState<boolean>(false);
+    const [filters, setFilters] = useState<Filter[]>([]);
+    const [filterPopup, setFilterPopup] = useState<boolean>(false);
 
-    const sortedProducts = useMemo(
-        () => sortProducts(products, sortRules),
-        [products, sortRules]
+    let products = useMemo(() => {
+        let filteredProducts = filterProducts(
+            productsData,
+            filters,
+            columnsData
     );
+        let sortedProducts = sortProducts(filteredProducts, sortRules);
+        return filteredProducts;
+    }, [productsData, filters, sortRules]);
 
     useEffect(() => {
         const getMainImages = async (mainImagesData: ImageData[]) => {
@@ -100,15 +194,19 @@ export default function ProductTable({
                 <div className="mt-24 w-full border-separate rounded border-[1px] border-slate-200">
                     <ProductTableOptionsContainer
                         columnsData={columnsData}
+                        filters={filters}
+                        setFilters={setFilters}
                         sortRules={sortRules}
                         setSortRules={setSortRules}
+                        filterPopup={filterPopup}
+                        setFilterPopup={setFilterPopup}
                         sortPopup={sortPopup}
                         setSortPopup={setSortPopup}
                     />
-                    <table className="w-full table-auto border-separate over border-spacing-0">
-                        <ProductTableHead columns={colArr} />
+                    <table className="over w-full table-auto border-separate border-spacing-0">
+                        <ProductTableHead columnsData={columnsData} />
                         <ProductTableBody
-                            products={sortedProducts!}
+                            products={products}
                             mainImages={mainImages}
                         />
                     </table>

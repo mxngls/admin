@@ -48,3 +48,8 @@ export interface SortRule {
     ascending: boolean;
 }
 
+export interface Filter {
+    column: string;
+    compare: string | number;
+    type: "=" | "<>" | ">" | "<" | ">=" | "<=" | "in";
+}
