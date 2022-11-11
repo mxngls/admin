@@ -4,7 +4,7 @@ import { ImageData } from "./types";
 
 async function fetchProductsData(
     colums?: string
-): Promise<ProductData[] | null> {
+): Promise<ProductData[] | Error> {
     try {
         const { data, error } = await supabase
             .from("products")
@@ -66,7 +66,7 @@ async function fetchProductTypes() {
     }
 }
 
-async function fetchMainImageData(): Promise<ImageData[]> {
+async function fetchMainImageData(): Promise<ImageData[] | Error> {
     try {
         const { data, error } = await supabase
             .from("image_urls")
@@ -95,7 +95,7 @@ async function fetchImageData(product_id: string): Promise<ImageData[] | Error> 
     }
 }
 
-async function fetchImage(filepath: string): Promise<Blob | null> {
+async function fetchImage(filepath: string): Promise<Blob | Error> {
     try {
         const { data, error } = await supabase.storage
             .from("content")
