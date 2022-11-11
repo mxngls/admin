@@ -2,21 +2,17 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import ColumnList from "./ColumnList";
 import { NavArrowDown } from "iconoir-react";
 import ActiveRule from "./ActiveRule";
-
-interface SortRule {
-    column: string;
-    ascending: boolean;
-}
+import { ColumnsData, SortRule } from "../../../../lib/types";
 
 interface SortPopupContainerProps {
-    columns: string[];
+    columnsData: ColumnsData;
     sortRules: SortRule[];
     setSortRules: Dispatch<SetStateAction<SortRule[]>>;
     setSortPopup: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function SortPopupContainer({
-    columns,
+    columnsData,
     sortRules,
     setSortRules,
     setSortPopup,
@@ -72,12 +68,11 @@ export default function SortPopupContainer({
                 </div>
                 {!!showColumnList && (
                     <ColumnList
-                        columns={columns}
+                                columnsData={columnsData}
                         setShowColumnList={setShowColumnList}
-                        sortRules={sortRules}
-                        setSortRules={setSortRules}
+                                current={sortRules}
                         onClickHandler={addRule}
-                    />
+                            />{" "}
                 )}
             </div>
         </div>

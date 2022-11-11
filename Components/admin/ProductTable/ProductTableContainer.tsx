@@ -1,26 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { ProductData, ImageData } from "../../../lib/types";
+import {
+    ProductData,
+    ImageData,
+    SortRule,
+    MainImages,
+    Filter,
+    Products,
+    ColumnsData,
+} from "../../../lib/types";
 import { fetchImage } from "../../../lib/queries";
-
 import ProductTableOptionsContainer from "./OptionsContainer/ProductTableOptionContainer";
 import ProductTableHead from "./ProductTableHead";
 import ProductTableBody from "./ProductTableBody";
-
-interface Products {
-    productData: ProductData[];
-    mainImagesData: ImageData[];
-    colArr: string[];
-}
-
-interface MainImages {
-    [productId: string]: string;
-}
-
-interface SortRule {
-    column: string;
-    ascending: boolean;
-}
 
 const sortProducts = (products: ProductData[], sortRules: SortRule[]) => {
     try {

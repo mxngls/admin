@@ -5,15 +5,10 @@ import { useClickOutside } from "../../../../lib/hooks";
 import SortPopupContainer from "./SortPopupContainer";
 import SortButton from "./SortButton";
 import FilterButton from "./FilterButton";
-import SortRule from "./SortButton";
-
-interface SortRule {
-    column: string;
-    ascending: boolean;
-}
+import { ColumnsData, Filter, SortRule } from "../../../../lib/types";
 
 interface ProductTableHeadProps {
-    columns: string[];
+    columnsData: ColumnsData;
     sortRules: SortRule[];
     setSortRules: Dispatch<SetStateAction<SortRule[]>>;
     sortPopup: boolean;
@@ -21,7 +16,7 @@ interface ProductTableHeadProps {
 }
 
 export default function ProductTableOptionContainer({
-    columns,
+    columnsData,
     sortRules,
     setSortRules,
     sortPopup,
@@ -41,7 +36,7 @@ export default function ProductTableOptionContainer({
                 />
                 {sortPopup && (
                     <SortPopupContainer
-                        columns={columns}
+                        columnsData={columnsData}
                         sortRules={sortRules}
                         setSortRules={setSortRules}
                         setSortPopup={setSortPopup}

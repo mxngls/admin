@@ -1,12 +1,7 @@
 import ProductTable from "../../Components/admin/ProductTable/ProductTableContainer";
 import { fetchMainImageData, fetchProductsData } from "../../lib/queries";
 import { ProductData, ImageData } from "../../lib/types";
-
-interface Products {
-    productsData: ProductData[];
-    mainImagesData: ImageData[];
-    colArr: string[];
-}
+import { Products } from "../../lib/types";
 
 export default function Products({
     productsData,

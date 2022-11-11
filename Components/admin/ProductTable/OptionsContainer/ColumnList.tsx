@@ -1,10 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
 
-interface SortRule {
-    column: string;
-    ascending: boolean;
-}
-
 interface ColumnListProps {
     columns: string[];
     setShowColumnList: Dispatch<SetStateAction<boolean>>;

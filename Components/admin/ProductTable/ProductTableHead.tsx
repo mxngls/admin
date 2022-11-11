@@ -1,15 +1,19 @@
+import { ColumnsData } from "../../../lib/types";
+
 interface ProductTableHeadProps {
-    columns: string[];
+    columnsData: ColumnsData;
 }
 
-export default function ProductTableHead({ columns }: ProductTableHeadProps) {
+export default function ProductTableHead({
+    columnsData,
+}: ProductTableHeadProps) {
     return (
         <thead>
             <tr>
                 <th className="sticky left-0 border-r-[1px] border-r-slate-200 bg-white p-3">
                     Main Image
                 </th>
-                {columns.map((column, index) => {
+                {Object.keys(columnsData).map((column, index) => {
                     return (
                         <th
                             className={

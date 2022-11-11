@@ -1,10 +1,6 @@
 import { Cancel } from "iconoir-react";
 import { Dispatch, SetStateAction, useEffect } from "react";
-
-interface SortRule {
-    column: string;
-    ascending: boolean;
-}
+import { SortRule } from "../../../../lib/types";
 
 interface ActiveRuleProps {
     rule: SortRule;

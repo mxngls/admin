@@ -23,3 +23,28 @@ export interface InputError {
     isErr: Boolean;
     message: string;
 }
+
+export interface ColumnsData {
+    [key: string]: {
+        format: string;
+        type: string;
+        default?: string;
+        description?: string;
+    };
+}
+
+export interface Products {
+    productsData: ProductData[];
+    mainImagesData: ImageData[];
+    columnsData: ColumnsData;
+}
+
+export interface MainImages {
+    [productId: string]: string;
+}
+
+export interface SortRule {
+    column: string;
+    ascending: boolean;
+}
+
