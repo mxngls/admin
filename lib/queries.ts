@@ -71,7 +71,7 @@ async function fetchMainImageData(): Promise<ImageData[] | Error> {
         const { data, error } = await supabase
             .from("image_urls")
             .select("*")
-            .match({ main: true });
+            .eq("main", true);
         if (error) throw new Error(error.message);
         return data;
     } catch (error: any) {
@@ -207,7 +207,6 @@ const deleteImage = async (filepath: string): Promise<void> => {
 };
 
 const uploadImage = async (file: File, filename: string) => {
-    console.log(`images/${filename}`);
     try {
         const { error } = await supabase.storage
             .from("content")
