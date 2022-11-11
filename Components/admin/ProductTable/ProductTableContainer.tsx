@@ -156,7 +156,7 @@ export default function ProductTableContainer({
             productsData,
             filters,
             columnsData
-    );
+        );
         let sortedProducts = sortProducts(filteredProducts, sortRules);
         return filteredProducts;
     }, [productsData, filters, sortRules]);
@@ -167,7 +167,7 @@ export default function ProductTableContainer({
                 if (image) {
                     if (image.main === true) {
                         const url = await fetchImage(image.filepath)
-                            .then((blob) => URL.createObjectURL(blob!))
+                            .then((blob) => URL.createObjectURL(blob as Blob))
                             .catch((error) => {
                                 console.log("error", error.message);
                                 return error;
