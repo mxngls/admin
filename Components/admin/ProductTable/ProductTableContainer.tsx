@@ -69,6 +69,7 @@ const filterProducts = (
                 let compare = filters[i].compare;
                 let type = columnsData[filters[i].column].type;
 
+                if (!!compare) {
                     if (type === "string") {
                         value = (value as string).toLowerCase();
                         compare = (compare as string).toLowerCase();
@@ -114,6 +115,7 @@ const filterProducts = (
                         }
                     }
                 }
+            }
             return true;
         };
         return products.filter((product) => filterCallback(filters, product));
