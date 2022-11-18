@@ -6,7 +6,10 @@ const useClickOutside = <T extends HTMLElement>(handler: Function) => {
 
     useEffect(() => {
         const handleMouseDown = (e: Event) => {
-            if (domNode.current && !domNode.current.contains(e.target as Node)) {
+            if (
+                domNode.current &&
+                !domNode.current.contains(e.target as Node)
+            ) {
                 handler();
             }
         };
@@ -70,4 +73,4 @@ const useImageFileError = (file: File | null, fileName: string) => {
     return err;
 };
 
-export {useClickOutside, useProductAttributeError, useImageFileError}
+export { useClickOutside, useProductAttributeError, useImageFileError };
