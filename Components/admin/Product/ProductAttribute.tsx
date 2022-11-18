@@ -125,71 +125,72 @@ export default function ProductAttribute({
 
     if (isEdit) {
         return (
-            <div className="mb-6 sm:flex sm:content-between sm:items-baseline">
-                <h4 className="mt-4 mb-2 pb-1 sm:mr-[5%] sm:w-[25%]">
-                    {title}
-                </h4>
+            <div className="mb-6 sm:flex sm:content-between sm:items-start xl:sm:justify-start">
+                <h4 className="sm:mr-[5%] sm:w-[25%]">{title}</h4>
                 <form
                     className="flex flex-col justify-between sm:w-[70%]"
                     onSubmit={handleSubmit}
                     ref={formRef}
-                    style={{
-                        maxWidth: contentHeight?.width,
-                        height: contentHeight?.height,
-                    }}
                 >
-                    {type === "string" ? (
-                        <textarea
-                            ref={containerRef}
-                            onKeyDown={submitOnEnter}
-                            name="editProductPttribute"
-                            required={true}
-                            value={content}
-                            autoFocus={true}
-                            onChange={(
-                                event: React.ChangeEvent<HTMLTextAreaElement>
-                            ) => handleChangeContent(event)}
-                            spellCheck={false}
-                            className={`h-[100%] w-[100%] resize-none p-[15px] text-slate-700 outline-none placeholder:text-slate-400 ${
-                                err.isErr &&
-                                "border-pink-500 text-pink-600 focus:border-[1px] focus:border-pink-500"
-                            } invalid:border-pink-500 invalid:text-pink-600 focus:rounded focus:border-[1px] focus:border-slate-700 focus:p-[11px] focus:invalid:border-2 focus:invalid:border-pink-500`}
-                        ></textarea>
-                    ) : (
-                        <input
-                            ref={containerRef}
-                            style={{
-                                maxWidth: contentHeight?.width,
-                                height: contentHeight?.height,
-                            }}
-                            autoFocus={true}
-                            required={true}
-                            value={content}
+                    <div
+                        style={{
+                            maxWidth: contentHeight?.width,
+                            height: contentHeight?.height,
+                        }}
+                    >
+                        {type === "string" ? (
+                            <textarea
+                                ref={containerRef}
+                                onKeyDown={submitOnEnter}
+                                name="editProductPttribute"
+                                required={true}
+                                value={content}
+                                autoFocus={true}
+                                onChange={(
+                                    event: React.ChangeEvent<HTMLTextAreaElement>
+                                ) => handleChangeContent(event)}
+                                spellCheck={false}
+                                className={`h-full w-full resize-none p-[15px] text-slate-700 outline-none placeholder:text-slate-400 ${
+                                    err.isErr
+                                        ? "border-2 border-pink-500 text-pink-600 focus:border-pink-500"
+                                        : "focus:border-[1px] focus:border-slate-700"
+                                } focus:rounded focus:p-[11px] focus:invalid:border-2`}
+                            ></textarea>
+                        ) : (
+                            <input
+                                ref={containerRef}
+                                autoFocus={true}
+                                required={true}
+                                value={content}
                                 min={0}
-                            onChange={(
-                                event: React.ChangeEvent<HTMLInputElement>
-                            ) => handleChangeContent(event)}
-                            className={`h-[100%] w-[100%] resize-none p-[15px] text-slate-700 outline-none placeholder:text-slate-400 ${
-                                err.isErr &&
-                                "border-pink-500 text-pink-600 focus:border-[1px] focus:border-pink-500"
-                            } invalid:border-pink-500 invalid:text-pink-600 focus:rounded focus:border-[1px] focus:border-slate-700 focus:p-[11px] focus:invalid:border-2 focus:invalid:border-pink-500`}
-                        />
-                    )}
-                    {err.isErr && (
-                        <span className="text-pink-600">{err.message}</span>
-                    )}
+                                onChange={(
+                                    event: React.ChangeEvent<HTMLInputElement>
+                                ) => handleChangeContent(event)}
+                                className={`h-full w-full resize-none p-[15px] text-slate-700 outline-none placeholder:text-slate-400 ${
+                                    err.isErr
+                                        ? "border-2 border-pink-500 text-pink-600 focus:border-pink-500"
+                                        : "focus:border-[1px] focus:border-slate-700"
+                                } focus:rounded focus:p-[11px] focus:invalid:border-2`}
+                            />
+                        )}
+                    </div>
+                    <div className="mt-2 h-6">
+                        {err.isErr && (
+                            <span className="text-pink-600">{err.message}</span>
+                        )}
+                    </div>
                 </form>
             </div>
         );
     } else
         return (
-            <div className="mb-6 sm:flex sm:content-between sm:items-baseline">
-                <h4 className="mt-4 mb-2 pb-1 text-slate-400 sm:mr-[5%] sm:w-[25%]">
+            <div className="mb-6 sm:flex sm:content-between sm:items-start sm:justify-start">
+                <h4 className="text-slate-400 sm:mr-[5%] sm:w-[25%]">
                     {title}
                 </h4>
                 <div
                     ref={containerRef}
-                    className=" whitespace-pre-line rounded border-[1px] border-slate-200 bg-white p-[11px] text-slate-400 transition-all duration-75 ease-in-out hover:cursor-default focus:border-slate-700 focus:ring-1 focus:ring-slate-700 sm:w-[70%]"
+                    className="mb-8 whitespace-pre-line rounded border-[1px] border-slate-200 bg-white p-[11px] text-slate-400 transition-all duration-75 ease-in-out hover:cursor-default focus:border-slate-700 focus:ring-1 focus:ring-slate-700 sm:w-[70%]"
                     onClick={handleOnClick}
                 >
                     {!!value ? (
