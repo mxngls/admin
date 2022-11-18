@@ -6,18 +6,23 @@ import { Toaster } from "react-hot-toast";
 import ProductImagesContainer from "../../../Components/admin/Product/ProductImagesContainer";
 import ProductTitle from "../../../Components/admin/Product/ProductTitle";
 import {
+    fetchColumns,
     fetchImageData,
     fetchProductData,
 } from "../../../lib/queries";
-import { ImageData, ProductData } from "../../../lib/types";
+import { ColumnsData, ImageData, ProductData } from "../../../lib/types";
 
 interface Product {
+    columnsData: ColumnsData;
     productData: ProductData;
     imageData: ImageData[];
-    imageFiles: Blob[];
 }
 
-export default function Product({ productData, imageData }: Product) {
+export default function Product({
+    columnsData,
+    productData,
+    imageData,
+}: Product) {
     const [product, setProduct] = useState<ProductData>(productData);
     const [images, setImages] = useState<ImageData[]>(imageData);
     const [openDialog, setOpenDialog] = useState<Boolean>(false);
@@ -32,7 +37,7 @@ export default function Product({ productData, imageData }: Product) {
         return (
             <div className="my-16 text-lg sm:mx-auto sm:text-base md:max-w-[90%] lg:max-w-[75%] xl:max-w-[50%] 2xl:max-w-[40%]">
                 <ProductTitle
-                    id={product.product_id}
+                    productId={product.product_id}
                     name={product.name}
                     type={"string"}
                     setProduct={setProduct}
@@ -49,16 +54,10 @@ export default function Product({ productData, imageData }: Product) {
                             return (
                                 <ProductAttribute
                                     key={index}
-                                    id={product.product_id}
+                                    productId={product.product_id}
                                     column={key}
                                     value={product[key as keyof ProductData]!}
-                                    type={
-                                        key === "pieces"
-                                            ? "number"
-                                            : key === "price"
-                                            ? "number"
-                                            : "string"
-                                    }
+                                    type={columnsData[key].type}
                                     setProduct={setProduct}
                                 />
                             );
@@ -70,7 +69,7 @@ export default function Product({ productData, imageData }: Product) {
                     setImages={setImages}
                     openDialog={openDialog}
                     setOpenDialog={setOpenDialog}
-                    id={product.product_id}
+                    productId={product.product_id}
                 />
                 <Toaster />
             </div>
@@ -79,15 +78,22 @@ export default function Product({ productData, imageData }: Product) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+    const productsMeta = await fetchColumns("products");
+    const columnsData = productsMeta.products.properties;
+
     const id = context.params!.id as string;
     const productData = await fetchProductData(id);
     const imageData = await fetchImageData(id);
 
-    if (productData instanceof Error || imageData instanceof Error) {
+    if (
+        productData instanceof Error ||
+        imageData instanceof Error ||
+        productsMeta instanceof Error
+    ) {
         return { notFound: true };
     } else {
         return {
-            props: { productData, imageData },
+            props: { productData, imageData, columnsData },
         };
     }
 };
