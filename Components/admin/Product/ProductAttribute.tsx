@@ -10,7 +10,6 @@ import { useClickOutside, useProductAttributeError } from "../../../lib/hooks";
 import { ProductData } from "../../../lib/types";
 import toast from "react-hot-toast";
 import { updateProductData } from "../../../lib/queries";
-import { number } from "prop-types";
 
 interface AttributeProps {
     productId: string;
@@ -36,12 +35,7 @@ export default function ProductAttribute({
     } | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
-    let err = useProductAttributeError(
-        content,
-        // Convert types returned from Postgres query to JS Objects
-        // to enable comparision in useProductAttributeError hook
-        type === "string" ? "string" : "number"
-    );
+    let err = useProductAttributeError(content, type);
 
     const containerRef: React.RefObject<HTMLDivElement> &
         React.RefObject<HTMLInputElement> &
@@ -75,7 +69,7 @@ export default function ProductAttribute({
             | React.ChangeEvent<HTMLTextAreaElement>
             | React.ChangeEvent<HTMLInputElement>
     ) => {
-        if (type === "integer") {
+        if (type === "number") {
             const number = Number(event.target.value)
                 ? parseInt(event.target.value)
                 : event.target.value;
@@ -137,7 +131,7 @@ export default function ProductAttribute({
                             <textarea
                                 ref={containerRef}
                                 onKeyDown={submitOnEnter}
-                                name="editProductPttribute"
+                                name="editProductAttribute"
                                 required={true}
                                 value={content}
                                 autoFocus={true}

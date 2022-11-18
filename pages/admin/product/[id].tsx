@@ -33,6 +33,12 @@ export default function Product({
         }
     };
 
+    const convertNumberType = (type: string) => {
+        // Convert types returned from Postgres query to JS Objects
+        // to enable comparision in useProductAttributeError hook
+        return type === "string" ? "string" : "number";
+    };
+
     if (product) {
         return (
             <div className="my-16 text-lg sm:mx-auto sm:text-base md:max-w-[90%] lg:max-w-[75%] xl:max-w-[50%] 2xl:max-w-[40%]">
@@ -57,7 +63,9 @@ export default function Product({
                                     productId={product.product_id}
                                     column={key}
                                     value={product[key as keyof ProductData]!}
-                                    type={columnsData[key].type}
+                                    type={convertNumberType(
+                                        columnsData[key].type
+                                    )}
                                     setProduct={setProduct}
                                 />
                             );
