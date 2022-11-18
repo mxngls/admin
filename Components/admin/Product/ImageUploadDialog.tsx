@@ -38,14 +38,13 @@ export default function ImageUploadDialog({
     let err = useImageFileError(file, fileName);
 
     useEffect(() => {
+        setFileName("");
         setFile(null);
     }, [openDialog]);
 
     useEffect(() => {
         const dialog = dialogRef.current;
         if (!openDialog && dialog) {
-            setFileName("");
-            setFile(null);
             dialog.close();
         } else if (!!openDialog && dialog) {
             dialog.showModal();
@@ -67,7 +66,7 @@ export default function ImageUploadDialog({
 
     const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!err.isErr && !!file && !!fileName) {
+        if (!!file && !!fileName) {
             setOpenDialog(false);
             await toast.promise(
                 uploadImage(file, fileName)
