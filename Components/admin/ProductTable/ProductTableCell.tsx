@@ -1,3 +1,5 @@
+import { formatValue } from "../../../lib/helpers";
+
 interface ProductCell {
     attribute: string;
     value: string | number;
@@ -11,16 +13,6 @@ export default function ProductTableCell({
     value,
     type,
 }: ProductCell) {
-    const formatValue = (attribute: string, value: string | number) => {
-        if (attribute === "price") {
-            return new Intl.NumberFormat("ko-KR", {
-                style: "currency",
-                currency: "KRW",
-            }).format(value as number);
-        }
-        return value;
-    };
-
     return (
         <td
             className={

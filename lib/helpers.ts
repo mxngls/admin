@@ -12,4 +12,14 @@ const capitalizeFirstLetter = (string: string, locale = navigator.language) => {
     }
 };
 
-export { capitalizeFirstLetter };
+const formatValue = (attribute: string, value: string | number) => {
+    if (attribute === "price") {
+        return new Intl.NumberFormat("ko-KR", {
+            style: "currency",
+            currency: "KRW",
+        }).format(value as number);
+    }
+    return value;
+};
+
+export { capitalizeFirstLetter, formatValue };

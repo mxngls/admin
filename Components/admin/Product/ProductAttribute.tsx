@@ -5,7 +5,7 @@ import React, {
     Dispatch,
     useRef,
 } from "react";
-import { capitalizeFirstLetter } from "../../../lib/helpers";
+import { capitalizeFirstLetter, formatValue } from "../../../lib/helpers";
 import { useClickOutside, useProductAttributeError } from "../../../lib/hooks";
 import { ProductData } from "../../../lib/types";
 import toast from "react-hot-toast";
@@ -19,11 +19,6 @@ interface AttributeProps {
     type: string;
     setProduct: Dispatch<SetStateAction<ProductData>>;
 }
-
-const formatValue = (value: string | number) => {
-    const formatted = new Intl.NumberFormat("ko-KR").format(value as number);
-    return formatted;
-};
 
 export default function ProductAttribute({
     productId,
@@ -195,7 +190,7 @@ export default function ProductAttribute({
                 >
                     {!!value ? (
                         type === "number" ? (
-                            formatValue(value)
+                            formatValue(column, value)
                         ) : (
                             value
                         )
