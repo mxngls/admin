@@ -23,11 +23,11 @@ export default function SortButton({
         >
             <Sort color={`${rulesNumber > 0 ? "rgb(34 197 94" : ""}`} />
             {rulesNumber > 0 ? (
-                <span className="hidden w-12 font-medium text-green-500 sm:block">
+                <span className="w-fit font-medium text-green-500 sm:block">
                     Sorted
                 </span>
             ) : (
-                <span className="hidden w-12 font-medium sm:block">Sort</span>
+                <span className="w-fit font-medium sm:block">Sort</span>
             )}
         </button>
     );
