@@ -223,8 +223,6 @@ const fetchColumns = async (table: string) => {
         const host = process.env.NEXT_PUBLIC_SUPABASE_DB_URL!;
         const key = process.env.NEXT_PUBLIC_SUPABASE_DB_PUBLIC_KEY!;
         const res = await fetch(`${host}/rest/v1/?apikey=${key}`);
-        // .then((res) => res.json())
-        // .then((data) => data.definitions);
         if (res.status !== 200) {
             throw new Error(res.statusText);
         }
