@@ -16,7 +16,7 @@ interface AttributeProps {
     productId: string;
     column: string;
     value: string | number;
-    type: "string" | "number";
+    type: string;
     setProduct: Dispatch<SetStateAction<ProductData>>;
 }
 
@@ -41,7 +41,12 @@ export default function ProductAttribute({
     } | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
-    let err = useProductAttributeError(content, type);
+    let err = useProductAttributeError(
+        content,
+        // Convert types returned from Postgres query to JS Objects
+        // to enable comparision in useProductAttributeError hook
+        type === "string" ? "string" : "number"
+    );
 
     const containerRef: React.RefObject<HTMLDivElement> &
         React.RefObject<HTMLInputElement> &
@@ -75,8 +80,11 @@ export default function ProductAttribute({
             | React.ChangeEvent<HTMLTextAreaElement>
             | React.ChangeEvent<HTMLInputElement>
     ) => {
-        if (type === "number") {
-            setContent(Number(event.target.value));
+        if (type === "integer") {
+            const number = Number(event.target.value)
+                ? parseInt(event.target.value)
+                : event.target.value;
+            setContent(number);
         } else {
             setContent(event.target.value);
         }
@@ -156,8 +164,8 @@ export default function ProductAttribute({
                             }}
                             autoFocus={true}
                             required={true}
-                            type={"number"}
                             value={content}
+                                min={0}
                             onChange={(
                                 event: React.ChangeEvent<HTMLInputElement>
                             ) => handleChangeContent(event)}
