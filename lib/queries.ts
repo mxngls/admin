@@ -101,7 +101,7 @@ async function fetchImage(filepath: string): Promise<Blob | Error> {
             .from("content")
             .download(filepath);
         if (error) throw new Error(error.message);
-        return data;
+        return data!;
     } catch (error: any) {
         console.log("error", error.message);
         return error;
