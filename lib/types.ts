@@ -25,7 +25,7 @@ export interface InputError {
 }
 
 export interface ColumnsData {
-    [key: string]: {
+    [column: string]: {
         format: string;
         type: string;
         default?: string;
