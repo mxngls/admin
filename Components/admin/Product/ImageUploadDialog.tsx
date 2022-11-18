@@ -105,8 +105,8 @@ export default function ImageUploadDialog({
                 ref={formRef}
                 className="flex h-full w-full flex-col items-center justify-center gap-6"
                 method="dialog"
-                onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
-                    handleOnSubmit(e)
+                onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
+                    handleOnSubmit(event)
                 }
             >
                 <div className="flex h-24 flex-col items-center justify-start">
@@ -114,17 +114,18 @@ export default function ImageUploadDialog({
                         autoCorrect="off"
                         spellCheck={false}
                         className={`${
-                            err.isErr &&
-                            "rounded border-2 border-pink-500 text-pink-600 focus:border-pink-500"
-                        } mb-2 rounded border-2 border-slate-400 p-4 text-slate-700 placeholder:text-gray-400 focus:rounded focus:border-2 focus:border-slate-700`}
+                            err.isErr
+                                ? "border-2 border-pink-500 text-pink-600 focus:border-2 focus:border-pink-500"
+                                : "border-2 border-slate-400 focus:border-2 focus:border-slate-700"
+                        } mb-2 rounded p-4 text-slate-700 outline-none placeholder:text-gray-400`}
                         type="text"
                         placeholder={
                             !file ? "Please insert a filename" : fileName
                         }
                         value={fileName}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            handleOnChangeFileName(e)
-                        }
+                        onChange={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                        ) => handleOnChangeFileName(event)}
                     />
                     {err.isErr && (
                         <span className="text-pink-600">{err.message}</span>
@@ -132,8 +133,8 @@ export default function ImageUploadDialog({
                 </div>
                 <input
                     ref={inputRef}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleOnChangeFile(e)
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        handleOnChangeFile(event)
                     }
                     accept="image/jpeg"
                     type="file"
