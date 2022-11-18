@@ -69,68 +69,51 @@ const filterProducts = (
                 let compare = filters[i].compare;
                 let type = columnsData[filters[i].column].type;
 
-                console.log(value, compare)
+                    if (type === "string") {
+                        value = (value as string).toLowerCase();
+                        compare = (compare as string).toLowerCase();
+                        const tags = ["en-US", "ko-KR"];
+                        const res = value.localeCompare(compare, tags);
 
-                if (type === "string") {
-                    value = (value as string).toLowerCase();
-                    compare = (compare as string).toLowerCase();
-                    const tags = ["en-US", "ko-KR"];
-                    const res = value.localeCompare(compare, tags);
-
-                    switch (filters[i].type) {
-                        case "=":
-                            return res === 0 ? true : false;
-                            break;
-                        case "<>":
-                            return res !== 0 ? true : false;
-                            break;
-                        case ">":
-                            return res > 0 ? true : false;
-                            break;
-                        case "<":
-                            return res < 0 ? true : false;
-                            break;
-                        case ">=":
-                            return res <= 0 ? true : false;
-                            break;
-                        case "<=":
-                            return res >= 0 ? true : false;
-                            break;
-                        case "in":
-                            return value.includes(compare) ? true : false;
-                            break;
-                        default:
-                            return false;
-                    }
-
-                } else if (type === "integer") {
-                    switch (filters[i].type) {
-                        case "=":
-                            return value == compare ? true : false;
-                            break;
-                        case "<>":
-                            return value != compare ? true : false;
-                            break;
-                        case ">":
-                            return value! > compare ? true : false;
-                            break;
-                        case "<":
-                            return value! < compare ? true : false;
-                            break;
-                        case ">=":
-                            return value! >= compare ? true : false;
-                            break;
-                        case "<=":
-                            return value! <= compare ? true : false;
-                            break;
-                        case "in":
-                            return false;
-                            break;
-                        default:
-                            return false;
+                        switch (filters[i].type) {
+                            case "=":
+                                return res === 0 && true;
+                            case "<>":
+                                return res !== 0 && true;
+                            case ">":
+                                return res > 0 && true;
+                            case "<":
+                                return res < 0 && true;
+                            case ">=":
+                                return res <= 0 && true;
+                            case "<=":
+                                return res >= 0 && true;
+                            case "in":
+                                return value.includes(compare) && true;
+                            default:
+                                return false;
+                        }
+                    } else if (type === "integer") {
+                        switch (filters[i].type) {
+                            case "=":
+                                return value == compare && true;
+                            case "<>":
+                                return value != compare && true;
+                            case ">":
+                                return value! > compare && true;
+                            case "<":
+                                return value! < compare && true;
+                            case ">=":
+                                return value! >= compare && true;
+                            case "<=":
+                                return value! <= compare && true;
+                            case "in":
+                                return false;
+                            default:
+                                return false;
+                        }
                     }
                 }
-            }
             return true;
         };
         return products.filter((product) => filterCallback(filters, product));
