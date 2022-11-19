@@ -144,7 +144,7 @@ export default function ProductTableContainer({
         );
         let sortedProducts = sortProducts(filteredProducts, sortRules);
         return filteredProducts;
-    }, [productsData, filters, sortRules]);
+    }, [productsData, filters, columnsData, sortRules]);
 
     useEffect(() => {
         const getMainImages = async (mainImagesData: ImageData[]) => {
