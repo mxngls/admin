@@ -29,7 +29,8 @@ export default function ProductImage({
 
     useEffect(() => {
         fetchImage(filepath).then(
-            (blob) => blob && setURL(URL.createObjectURL(blob))
+            (blob) =>
+                !(blob instanceof Error) && setURL(URL.createObjectURL(blob))
         );
     }, [filepath]);
 
@@ -39,10 +40,10 @@ export default function ProductImage({
         await toast.promise(
             toggleMainImage(imageId, productId, isMain)
                 .then((imageData) => {
-                    setImages(
-                        imageData!
-                            .sort((a, b) => a.primary - b.primary)
-                    );
+                    !(imageData instanceof Error) &&
+                        setImages(
+                            imageData.sort((a, b) => a.primary - b.primary)
+                        );
                 })
                 .catch((error) => {
                     console.log("error", error);
