@@ -26,7 +26,7 @@ export default function ProductTableCell({
                 } flex`}
             >
                 <span
-                    className={`block w-24 flex-1 overflow-hidden text-ellipsis whitespace-nowrap ${
+                    className={`block flex-1 overflow-hidden text-ellipsis whitespace-nowrap ${
                         type === "number" ? "text-center" : "text-left"
                     }`}
                 >

@@ -129,7 +129,7 @@ export default function ActiveFilter({
                     }}
                     value={filterValue}
                     type={"text"}
-                    className="w-full rounded border-[1px] border-slate-300 bg-slate-100 px-3 px-2 py-1 text-sm placeholder-slate-400 outline-none hover:border-slate-400 focus:ring-1 focus:ring-slate-300"
+                    className="w-full rounded border-[1px] border-slate-300 bg-slate-100 px-2 py-1 text-sm placeholder-slate-400 outline-none hover:border-slate-400 focus:ring-1 focus:ring-slate-300"
                     placeholder="Enter value"
                 />
             </form>

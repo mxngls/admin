@@ -188,7 +188,7 @@ export default function ProductTableContainer({
                         sortPopup={sortPopup}
                         setSortPopup={setSortPopup}
                     />
-                    <table className="over w-full table-auto border-separate border-spacing-0">
+                    <table className="w-full table-auto border-separate border-spacing-0">
                         <ProductTableHead columnsData={columnsData} />
                         <ProductTableBody
                             products={products}
