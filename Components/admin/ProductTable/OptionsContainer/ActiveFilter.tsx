@@ -57,83 +57,86 @@ export default function ActiveFilter({
     };
 
     return (
-        <div className="flex min-h-[3rem] w-96 flex-col items-start justify-start border-b-[1px] border-slate-200 py-2 last:border-none sm:m-0 sm:flex-row sm:items-center sm:border-none">
-            <div ref={columnListRef} className="relative w-[45%]">
-                <button
-                    className="flex w-full items-center justify-start rounded border-[1px] border-slate-300 bg-slate-100 px-2 py-1 text-sm hover:border-slate-400 focus:ring-1 focus:ring-slate-300"
-                    onClick={(event) => {
-                        setShowColumnList((current) => !current);
-                    }}
-                >
-                    <NavArrowDown
-                        className="mr-2 text-slate-400"
-                        height={"20px"}
-                        width={"20px"}
-                    />
-                    <span className="mr-4">{activeFilter.column}</span>
-                </button>
-                {!!showColumnList && (
-                    <div className="absolute z-50 mt-1 rounded border-[1px] border-slate-200 bg-slate-100">
-                        <ColumnList
-                            columnsData={columnsData}
-                            setShowColumnList={setShowColumnList}
-                            current={filters}
-                            onClickHandler={changeFilterColumn}
+        <div className="flex flex-row items-center border-b-[1px] border-slate-200 py-2 last:border-none">
+            <div className="flex flex-1 flex-col items-stretch gap-y-2 sm:flex-row sm:gap-y-0 sm:gap-x-2">
+                <div ref={columnListRef} className="relative flex flex-auto">
+                    <button
+                        className="flex flex-1 rounded border-[1px] border-slate-300 bg-slate-100 px-2 py-1 text-sm hover:border-slate-400 focus:ring-1 focus:ring-slate-300"
+                        onClick={(event) => {
+                            setShowColumnList((current) => !current);
+                        }}
+                    >
+                        <NavArrowDown
+                            className="text-slate-400"
+                            height={"20px"}
+                            width={"20px"}
                         />
-                    </div>
-                )}
-            </div>
-            <div ref={filterListRef} className="relative mx-1 w-[20%]">
-                <button
-                    className="flex w-full items-center justify-start rounded border-[1px] border-slate-300 bg-slate-100 py-1 px-2 text-sm hover:border-slate-400 focus:ring-2 focus:ring-slate-300"
-                    onClick={(event) => {
-                        setShowFilterList((current) => !current);
-                    }}
-                >
-                    <NavArrowDown
-                        className="text-slate-400"
-                        height={"20px"}
-                        width={"20px"}
-                    />
-                    <span className="mx-1">[ {activeFilter.type} ]</span>
-                </button>
-                {!!showFilterList && (
-                    <div className="absolute z-50 mt-1 rounded border-[1px] border-slate-200 bg-slate-100 p-2 text-sm">
-                        <FilterList
-                            currentIndex={filterIndex}
-                            setFilters={setFilters}
-                            activeFilter={activeFilter}
-                            setShowFilterList={setShowFilterList}
+                        <span className="mx-1">{activeFilter.column}</span>
+                    </button>
+                    {!!showColumnList && (
+                        <div className="absolute top-9 z-50 rounded border-[1px] border-slate-200 bg-slate-100">
+                            <ColumnList
+                                columnsData={columnsData}
+                                setShowColumnList={setShowColumnList}
+                                current={filters}
+                                onClickHandler={changeFilterColumn}
+                            />
+                        </div>
+                    )}
+                </div>
+                <div ref={filterListRef} className="relative">
+                    <button
+                        className="flex w-20 justify-around rounded border-[1px] border-slate-300 bg-slate-100 py-1 px-2 text-sm hover:border-slate-400 focus:ring-1 focus:ring-slate-300"
+                        onClick={(event) => {
+                            setShowFilterList((current) => !current);
+                        }}
+                    >
+                        <NavArrowDown
+                            className="text-slate-400"
+                            height={"20px"}
+                            width={"20px"}
                         />
-                    </div>
-                )}
+                        <span className="mx-1">[ {activeFilter.type} ]</span>
+                    </button>
+                    {!!showFilterList && (
+                        <div className="absolute top-9 z-50 rounded border-[1px] border-slate-200 bg-slate-100 p-3 text-sm">
+                            <FilterList
+                                currentIndex={filterIndex}
+                                setFilters={setFilters}
+                                activeFilter={activeFilter}
+                                setShowFilterList={setShowFilterList}
+                            />
+                        </div>
+                    )}
+                </div>
+                <div className="flex flex-1 items-center">
+                    <form onSubmit={(event) => event.preventDefault()}>
+                        <input
+                            onChange={(event) => {
+                                handleOnChange(event);
+                                setFilters((current) =>
+                                    current.map((item) => {
+                                        if (
+                                            item.column === activeFilter.column
+                                        ) {
+                                            return {
+                                                ...item,
+                                                compare: event.target.value,
+                                            };
+                                        }
+                                        return item;
+                                    })
+                                );
+                            }}
+                            value={filterValue}
+                            type={"text"}
+                            className="w-28 min-w-0 rounded border-[1px] border-slate-300 bg-slate-100 px-2 py-1 text-sm placeholder-slate-400 outline-none hover:border-slate-400 focus:ring-1 focus:ring-slate-300"
+                            placeholder="Enter value"
+                        />
+                    </form>
+                </div>
             </div>
-            <form
-                onSubmit={(event) => event.preventDefault()}
-                className="w-[35%]"
-            >
-                <input
-                    onChange={(event) => {
-                        handleOnChange(event);
-                        setFilters((current) =>
-                            current.map((item) => {
-                                if (item.column === activeFilter.column) {
-                                    return {
-                                        ...item,
-                                        compare: event.target.value,
-                                    };
-                                }
-                                return item;
-                            })
-                        );
-                    }}
-                    value={filterValue}
-                    type={"text"}
-                    className="w-full rounded border-[1px] border-slate-300 bg-slate-100 px-2 py-1 text-sm placeholder-slate-400 outline-none hover:border-slate-400 focus:ring-1 focus:ring-slate-300"
-                    placeholder="Enter value"
-                />
-            </form>
-            <button className="ml-1 rounded hover:bg-slate-200">
+            <button className="m-1 mx-2 self-start rounded hover:bg-slate-200 sm:m-0 sm:mx-1 sm:self-center">
                 <Cancel
                     height={"20px"}
                     width={"20px"}

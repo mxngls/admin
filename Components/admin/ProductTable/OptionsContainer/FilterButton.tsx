@@ -23,11 +23,11 @@ export default function SortButton({
         >
             <Filter color={`${filterNumber > 0 ? "rgb(34 197 94" : ""}`} />
             {filterNumber > 0 ? (
-                <span className="hidden w-fit font-medium text-green-500 sm:block">
+                <span className="w-fit font-medium text-green-500 sm:block">
                     Filtered
                 </span>
             ) : (
-                <span className="hidden w-fit font-medium sm:block">
+                <span className="w-fit font-medium sm:block">
                     Filter
                 </span>
             )}

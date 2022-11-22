@@ -1,5 +1,5 @@
 import { Cancel } from "iconoir-react";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { SortRule } from "../../../../lib/types";
 
 interface ActiveRuleProps {
@@ -18,26 +18,26 @@ export default function ActiveRule({
     setSortRules,
 }: ActiveRuleProps) {
     return (
-        <div className="flex min-h-[3rem] min-w-full flex-col items-start justify-start border-b-[1px] border-slate-200 py-2 last:border-none sm:m-0 sm:flex-row sm:items-center sm:border-none">
-            <div className="flex items-center justify-start">
-                <button className="mr-1 rounded hover:bg-slate-200">
-                    <Cancel
-                        height={"20px"}
-                        width={"20px"}
-                        onClick={() => {
-                            setSortRules((current) =>
-                                current.filter((a) => a.column !== rule.column)
-                            );
-                        }}
-                    />
-                </button>
-                <span className="text-slate-400">Sorted by: </span>
-                <span className="ml-1 mr-16">{rule.column}</span>
-            </div>
-            <div className="ml-auto">
+        <div className="flex min-h-[3rem] min-w-full flex-row items-center justify-start border-b-[1px] border-slate-200 py-2 last:border-none sm:m-0 sm:flex-row sm:items-center sm:border-none">
+            <button className="m-1 mr-2 items-center rounded hover:bg-slate-200 sm:mr-1">
+                <Cancel
+                    height={"20px"}
+                    width={"20px"}
+                    onClick={() => {
+                        setSortRules((current) =>
+                            current.filter((a) => a.column !== rule.column)
+                        );
+                    }}
+                />
+            </button>
+            <div className="align-stretch flex flex-grow flex-col items-center sm:flex-row">
+                <div className="align-stretch flex flex-grow items-center sm:mr-4">
+                    <span className="text-slate-400">Sorted by: </span>
+                    <span className="ml-1">{rule.column}</span>
+                </div>
                 <label
                     htmlFor={`toggleSort-${rule.column}`}
-                    className="inline-flex cursor-pointer items-center"
+                    className="flex cursor-pointer items-center"
                 >
                     <span className="mr-2 text-slate-400">ascending:</span>
                     <div
@@ -47,7 +47,6 @@ export default function ActiveRule({
                     >
                         <input
                             onChange={(e) => {
-                                console.log("clicked");
                                 setSortRules((current) => [
                                     ...current.map((r, n) => {
                                         if (index === n) {

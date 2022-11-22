@@ -39,7 +39,7 @@ export default function FilterPopupContainer({
             className={`absolute mt-2 flex-row items-center overflow-visible whitespace-nowrap rounded border-[1px] border-slate-200 bg-slate-50 px-2`}
         >
             <div>
-                <div className="flex min-h-[3rem] min-w-full flex-col items-center justify-center border-b-[1px] border-slate-200 py-1">
+                <div className=" min-h-[3rem] border-b-[1px] border-slate-200 py-1">
                     {filters.length === 0 ? (
                         <span className="mx-2 place-self-center self-start  text-left">
                             No filters applied
@@ -63,9 +63,14 @@ export default function FilterPopupContainer({
                 </div>
             </div>
             <div className="mr-1 flex min-h-[2.5rem] min-w-full flex-col">
-                <div className="border-b-[1px] border-slate-200 py-2">
+                <div className="py-2">
                     <button
-                        className="flex items-center rounded py-1 px-2 text-sm hover:bg-slate-200"
+                        disabled={
+                            filters.length === Object.keys(columnsData).length
+                                ? true
+                                : false
+                        }
+                        className="flex items-center rounded py-1 px-2 text-sm hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-slate-50"
                         onClick={() => {
                             addFilter();
                         }}
