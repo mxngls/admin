@@ -188,13 +188,15 @@ export default function ProductTableContainer({
                         sortPopup={sortPopup}
                         setSortPopup={setSortPopup}
                     />
-                    <table className="w-full table-auto border-separate border-spacing-0">
-                        <ProductTableHead columnsData={columnsData} />
-                        <ProductTableBody
-                            products={products}
-                            mainImages={mainImages}
-                        />
-                    </table>
+                    <div className="overflow-x-scroll">
+                        <table className="w-full border-separate border-spacing-0">
+                            <ProductTableHead columnsData={columnsData} />
+                            <ProductTableBody
+                                products={products}
+                                mainImages={mainImages}
+                            />
+                        </table>
+                    </div>
                 </div>
             </div>
         );
