@@ -22,4 +22,10 @@ const formatValue = (attribute: string, value: string | number) => {
     return value;
 };
 
-export { capitalizeFirstLetter, formatValue };
+const convertNumberType = (type: string) => {
+    // Convert types returned from Postgres query to JS Objects
+    // to enable comparision in useProductAttributeError hook
+    return type === "string" ? "string" : "number";
+};
+
+export { capitalizeFirstLetter, formatValue, convertNumberType };

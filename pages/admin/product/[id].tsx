@@ -11,6 +11,7 @@ import {
     fetchProductData,
 } from "../../../lib/queries";
 import { ColumnsData, ImageData, ProductData } from "../../../lib/types";
+import { convertNumberType } from "../../../lib/helpers";
 
 interface Product {
     columnsData: ColumnsData;
@@ -31,12 +32,6 @@ export default function Product({
         if (!openDialog) {
             setOpenDialog(true);
         }
-    };
-
-    const convertNumberType = (type: string) => {
-        // Convert types returned from Postgres query to JS Objects
-        // to enable comparision in useProductAttributeError hook
-        return type === "string" ? "string" : "number";
     };
 
     if (product) {
