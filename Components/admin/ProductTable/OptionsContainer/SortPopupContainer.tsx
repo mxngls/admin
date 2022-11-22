@@ -57,7 +57,13 @@ export default function SortPopupContainer({
                 <div className="relative">
                     <div className="border-t-[1px] border-slate-200 py-3">
                         <button
-                            className="flex items-center rounded py-1 px-2 text-sm hover:bg-slate-200"
+                            disabled={
+                                Object.keys(columnsData).length ===
+                                sortRules.length
+                                    ? true
+                                    : false
+                            }
+                            className="flex items-center rounded py-1 px-2 text-sm hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-slate-50"
                             onClick={() =>
                                 setShowColumnList((current) => !current)
                             }
