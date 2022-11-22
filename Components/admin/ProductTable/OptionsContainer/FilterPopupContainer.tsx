@@ -27,10 +27,12 @@ export default function FilterPopupContainer({
                     ? false
                     : true;
             });
-            return [
-                ...current,
-                { column: notFiltered[0], compare: "", type: "=" },
-            ];
+            if (!!notFiltered[0])
+                return [
+                    ...current,
+                    { column: notFiltered[0], compare: "", type: "=" },
+                ];
+            else return current;
         });
     };
 
