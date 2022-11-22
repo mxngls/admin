@@ -16,7 +16,7 @@ export default function ProductTableCell({
     return (
         <td
             className={
-                "max-w-[100px] border-t-[1px] border-r-[1px] border-t-slate-200 border-r-slate-200 p-4 last:border-r-0"
+                "max-w-[100px] text-ellipsis whitespace-nowrap border-t-[1px] border-r-[1px] border-t-slate-200 border-r-slate-200 p-4 last:border-r-0"
             }
             key={index + "-cell"}
         >
