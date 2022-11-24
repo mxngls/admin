@@ -114,8 +114,8 @@ export default function ProductAttribute({
 
     if (isEdit) {
         return (
-            <div className="mb-6 sm:flex sm:content-between sm:items-start xl:sm:justify-start">
-                <h4 className="sm:mr-[5%] sm:w-[25%]">{title}</h4>
+            <div className="mb-3 sm:mb-4 sm:flex sm:content-between sm:items-start xl:sm:justify-start">
+                <h4 className="mb-3 sm:mb-0 sm:mr-[5%] sm:w-[25%]">{title}</h4>
                 <form
                     className="flex flex-col justify-between sm:w-[70%]"
                     onSubmit={handleSubmit}
@@ -139,7 +139,7 @@ export default function ProductAttribute({
                                     event: React.ChangeEvent<HTMLTextAreaElement>
                                 ) => handleChangeContent(event)}
                                 spellCheck={false}
-                                className={`h-full w-full resize-none p-[15px] text-slate-700 outline-none placeholder:text-slate-400 ${
+                                className={`h-full w-full resize-none overflow-hidden p-[15px] text-slate-700 outline-none placeholder:text-slate-400 ${
                                     err.isErr
                                         ? "border-2 border-pink-500 text-pink-600 focus:border-pink-500"
                                         : "focus:border-[1px] focus:border-slate-700"
@@ -151,7 +151,6 @@ export default function ProductAttribute({
                                 autoFocus={true}
                                 required={true}
                                 value={content}
-                                min={0}
                                 onChange={(
                                     event: React.ChangeEvent<HTMLInputElement>
                                 ) => handleChangeContent(event)}
@@ -163,7 +162,7 @@ export default function ProductAttribute({
                             />
                         )}
                     </div>
-                    <div className="mt-2 h-6">
+                    <div className="my-1 h-5">
                         {err.isErr && (
                             <span className="text-pink-600">{err.message}</span>
                         )}
@@ -173,13 +172,13 @@ export default function ProductAttribute({
         );
     } else
         return (
-            <div className="mb-6 sm:flex sm:content-between sm:items-start sm:justify-start">
-                <h4 className="text-slate-400 sm:mr-[5%] sm:w-[25%]">
+            <div className="mb-10 sm:mb-3 sm:flex sm:content-between sm:items-start sm:justify-start">
+                <h4 className="mb-3 text-slate-400 sm:mb-0 sm:mr-[5%] sm:w-[25%]">
                     {title}
                 </h4>
                 <div
                     ref={containerRef}
-                    className="mb-8 whitespace-pre-line rounded border-[1px] border-slate-200 bg-white p-[11px] text-slate-400 transition-all duration-75 ease-in-out hover:cursor-default focus:border-slate-700 focus:ring-1 focus:ring-slate-700 sm:w-[70%]"
+                    className="mb-8 scroll-m-0 whitespace-pre-line rounded border-[1px] border-slate-200 bg-white p-[11px] text-slate-400 transition-all duration-75 ease-in-out hover:cursor-default focus:border-slate-700 focus:ring-1 focus:ring-slate-700 sm:mb-8 sm:w-[70%]"
                     onClick={handleOnClick}
                 >
                     {!!value ? (
