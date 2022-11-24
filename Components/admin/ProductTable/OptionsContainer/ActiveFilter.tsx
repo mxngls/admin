@@ -58,7 +58,7 @@ export default function ActiveFilter({
 
     return (
         <div className="flex flex-row items-center border-b-[1px] border-slate-200 py-2 last:border-none">
-            <div className="flex flex-1 flex-col items-stretch gap-y-2 sm:flex-row sm:gap-y-0 sm:gap-x-2">
+            <div className="flex flex-col items-stretch gap-y-2 sm:flex-auto sm:flex-row sm:gap-y-0 sm:gap-x-2">
                 <div ref={columnListRef} className="relative flex flex-auto">
                     <button
                         className="flex flex-1 rounded border-[1px] border-slate-300 bg-slate-100 px-2 py-1 text-sm hover:border-slate-400 focus:ring-1 focus:ring-slate-300"
@@ -109,7 +109,7 @@ export default function ActiveFilter({
                         </div>
                     )}
                 </div>
-                <div className="flex flex-1 items-center">
+                <div className="min-w-[7rem] flex-1 self-stretch">
                     <form onSubmit={(event) => event.preventDefault()}>
                         <input
                             onChange={(event) => {
@@ -130,7 +130,7 @@ export default function ActiveFilter({
                             }}
                             value={filterValue}
                             type={"text"}
-                            className="w-28 min-w-0 rounded border-[1px] border-slate-300 bg-slate-100 px-2 py-1 text-sm placeholder-slate-400 outline-none hover:border-slate-400 focus:ring-1 focus:ring-slate-300"
+                            className="w-full min-w-0 rounded border-[1px] border-slate-300 bg-white px-2 py-1 text-sm placeholder-slate-400 outline-none hover:border-slate-400 focus:ring-1 focus:ring-slate-300"
                             placeholder="Enter value"
                         />
                     </form>
