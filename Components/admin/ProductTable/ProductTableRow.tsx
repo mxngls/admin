@@ -19,14 +19,23 @@ export default function ProductTableRow({
     const handleOnClick = () => {
         router.push(`/admin/product/${productData.product_id}`);
     };
+    const columns = Object.keys(productData);
 
     return (
         <tr
             onClick={() => handleOnClick()}
-            className={`${index % 2 !== 0 ? "bg-white" : "bg-slate-50"}`}
+            className={`${
+                index % 2 !== 0
+                    ? "bg-white"
+                    : "last: border-b-[1px] bg-slate-50"
+            }`}
         >
-            <ProductTableImage mainImage={mainImage} index={index} />
-            {Object.keys(productData).map((attribute: string, cellIndex) => {
+            <ProductTableImage
+                mainImage={mainImage}
+                length={columns.length}
+                index={index}
+            />
+            {columns.map((attribute, cellIndex) => {
                 return (
                     <ProductTableCell
                         type={
@@ -37,6 +46,7 @@ export default function ProductTableRow({
                         value={productData[attribute as keyof ProductData]!}
                         key={index + "-row" + cellIndex + "-cell"}
                         attribute={attribute}
+                        length={columns.length}
                         index={index}
                     />
                 );

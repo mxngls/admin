@@ -3,19 +3,22 @@ import { SleeperChair } from "iconoir-react";
 
 interface ProductTableImageProps {
     mainImage: string | null;
+    length: number;
     index: number;
 }
 
 export default function ProductTableImage({
     mainImage,
+    length,
     index,
 }: ProductTableImageProps) {
-
     return (
-        <td
+        <th
             className={`${
                 index % 2 !== 0 ? "bg-white" : "bg-slate-50"
-            } sticky left-0 flex border-collapse items-center justify-center border-t-[1px] border-r-[1px] border-t-slate-200 border-r-slate-200 p-2 text-center align-middle`}
+            } sticky left-0 z-10 flex items-center justify-center ${
+                length - 1 !== index ? "border-b-[1px]" : ""
+            } border-r-[1px] border-slate-200 p-2 text-center align-middle`}
         >
             {mainImage ? (
                 <Image
@@ -36,6 +39,6 @@ export default function ProductTableImage({
                     />
                 </div>
             )}
-        </td>
+        </th>
     );
 }
