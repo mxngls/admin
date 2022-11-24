@@ -12,11 +12,14 @@ export default function ProductsPage({
     columnsData,
 }: Products) {
     return (
-        <ProductTable
-            productsData={productsData}
-            mainImagesData={mainImagesData}
-            columnsData={columnsData}
-        />
+        // <div className="overflow-y-scroll">
+            <ProductTable
+                productsData={productsData}
+                mainImagesData={mainImagesData}
+                columnsData={columnsData}
+            />
+        // </div>
+        
     );
 }
 
