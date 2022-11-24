@@ -31,7 +31,7 @@ export default function SortPopupContainer({
 
     return (
         <div
-            className={`absolute mt-2 flex-row items-center overflow-visible whitespace-nowrap rounded border-[1px] border-slate-200 bg-slate-50 px-2`}
+            className={`absolute mt-2 flex-row items-center z-30 whitespace-nowrap rounded border-[1px] border-slate-200 bg-slate-50 px-2`}
         >
             <div className="justify-center-1 flex min-h-[3rem] min-w-full flex-col items-center justify-center">
                 {sortRules.length === 0 ? (
@@ -79,7 +79,7 @@ export default function SortPopupContainer({
                                 setShowColumnList={setShowColumnList}
                                 current={sortRules}
                                 onClickHandler={addRule}
-                            />{" "}
+                            />
                         </div>
                     )}
                 </div>
