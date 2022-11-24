@@ -14,6 +14,23 @@ import ProductTableOptionsContainer from "./OptionsContainer/ProductTableOptionC
 import ProductTableHead from "./ProductTableHead";
 import ProductTableBody from "./ProductTableBody";
 
+const searchProducts = (products: ProductData[], term: string) => {
+    const searched = products.filter((product) => {
+        return Object.entries(product).filter((entry) => {
+            if (!!entry[1])
+                return entry[1]
+                    .toString()
+                    .toLowerCase()
+                    .includes(term.toLocaleLowerCase());
+            else return false;
+        }).length > 0
+            ? true
+            : false;
+    });
+    console.log(searched);
+    return searched;
+};
+
 const sortProducts = (products: ProductData[], sortRules: SortRule[]) => {
     try {
         const sortCallback = (
@@ -133,18 +150,20 @@ export default function ProductTableContainer({
     const [mainImages, setMainImages] = useState<MainImages>({});
     const [sortRules, setSortRules] = useState<SortRule[]>([]);
     const [sortPopup, setSortPopup] = useState<boolean>(false);
+    const [term, setTerm] = useState<string>("");
     const [filters, setFilters] = useState<Filter[]>([]);
     const [filterPopup, setFilterPopup] = useState<boolean>(false);
 
     let products = useMemo(() => {
+        let searchedProducts = searchProducts(productsData, term);
         let filteredProducts = filterProducts(
-            productsData,
+            searchedProducts,
             filters,
             columnsData
         );
         let sortedProducts = sortProducts(filteredProducts, sortRules);
-        return filteredProducts;
-    }, [productsData, filters, columnsData, sortRules]);
+        return sortedProducts;
+    }, [productsData, filters, term, columnsData, sortRules]);
 
     useEffect(() => {
         const getMainImages = async (mainImagesData: ImageData[]) => {
@@ -179,6 +198,8 @@ export default function ProductTableContainer({
                 <div className="mt-24 w-full border-separate rounded border-[1px] border-slate-200">
                     <ProductTableOptionsContainer
                         columnsData={columnsData}
+                        term={term}
+                        setTerm={setTerm}
                         filters={filters}
                         setFilters={setFilters}
                         sortRules={sortRules}

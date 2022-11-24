@@ -1,6 +1,7 @@
 import Button from "../../../shared/Button";
 import { Plus } from "iconoir-react";
-import { Dispatch, SetStateAction } from "react";
+import ProductUploadDialog from "./ProductUploadDialog";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { useClickOutside } from "../../../../lib/hooks";
 import SortPopupContainer from "./SortPopupContainer";
 import SortButton from "./SortButton";
@@ -10,6 +11,8 @@ import { ColumnsData, Filter, SortRule } from "../../../../lib/types";
 
 interface ProductTableHeadProps {
     columnsData: ColumnsData;
+    term: string;
+    setTerm: Dispatch<SetStateAction<string>>;
     filters: Filter[];
     setFilters: Dispatch<SetStateAction<Filter[]>>;
     sortRules: SortRule[];
@@ -22,6 +25,8 @@ interface ProductTableHeadProps {
 
 export default function ProductTableOptionContainer({
     columnsData,
+    term,
+    setTerm,
     filters,
     setFilters,
     sortRules,
@@ -31,6 +36,12 @@ export default function ProductTableOptionContainer({
     sortPopup,
     setSortPopup,
 }: ProductTableHeadProps): JSX.Element {
+    const [openDialog, setOpenDialog] = useState<Boolean>(false);
+
+    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTerm(event.target.value);
+    };
+
     const sortPopupRef: React.RefObject<HTMLDivElement> = useClickOutside(() =>
         setSortPopup(false)
     );
@@ -69,7 +80,17 @@ export default function ProductTableOptionContainer({
                     />
                 )}
             </div>
-            <Button type={"button"}>
+            <input
+                onChange={(event) => handleOnChange(event)}
+                value={term}
+                placeholder={"Enter a keyword"}
+                className="left-0 h-[44px] w-40 rounded border-[1px] border-slate-300 p-2 placeholder-slate-400 outline-none hover:border-slate-400 focus:ring-1 focus:ring-slate-300"
+            ></input>
+            <div className="flex flex-row top-0 items-center h-[44px]">
+                <Button
+                    type={"button"}
+                    onClickHandler={() => setOpenDialog(true)}
+                >
                 <Plus className="float-left" />
                 <span className="overflow-hidden whitespace-nowrap">
                     Add Product
