@@ -41,9 +41,9 @@ export default function FilterPopupContainer({
             className={`absolute z-50 mt-2 flex-row items-center whitespace-nowrap rounded border-[1px] border-slate-200 bg-slate-50 px-2`}
         >
             <div>
-                <div className=" min-h-[3rem] border-b-[1px] border-slate-200 py-1">
+                <div className="flex min-h-[3rem] min-w-full flex-col items-center justify-center">
                     {filters.length === 0 ? (
-                        <span className="mx-2 place-self-center self-start  text-left">
+                        <span className="mx-2 place-self-center self-start text-left">
                             No filters applied
                         </span>
                     ) : (
