@@ -191,11 +191,11 @@ export default function ProductTableContainer({
 
     if (products)
         return (
-            <div className="mt-20 flex flex-col items-center justify-center">
+            <div className=" flex flex-col items-center justify-center">
                 <div className="border-b-2 border-slate-700 pb-6 text-center">
                     <h1>Products</h1>
                 </div>
-                <div className="mt-24 w-full border-separate rounded border-[1px] border-slate-200">
+                <div className="mt-12 h-[65vh] w-full overflow-auto rounded border-[1px] border-slate-200">
                     <ProductTableOptionsContainer
                         columnsData={columnsData}
                         term={term}
@@ -209,15 +209,13 @@ export default function ProductTableContainer({
                         sortPopup={sortPopup}
                         setSortPopup={setSortPopup}
                     />
-                    <div className="overflow-x-scroll">
-                        <table className="w-full border-separate border-spacing-0">
-                            <ProductTableHead columnsData={columnsData} />
-                            <ProductTableBody
-                                products={products}
-                                mainImages={mainImages}
-                            />
-                        </table>
-                    </div>
+                    <table className="w-full table-fixed border-separate border-spacing-0 overflow-auto">
+                        <ProductTableHead columnsData={columnsData} />
+                        <ProductTableBody
+                            products={products}
+                            mainImages={mainImages}
+                        />
+                    </table>
                 </div>
             </div>
         );

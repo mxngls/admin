@@ -38,7 +38,7 @@ export default function FilterPopupContainer({
 
     return (
         <div
-            className={`absolute mt-2 flex-row items-center overflow-visible whitespace-nowrap rounded border-[1px] border-slate-200 bg-slate-50 px-2`}
+            className={`absolute z-50 mt-2 flex-row items-center whitespace-nowrap rounded border-[1px] border-slate-200 bg-slate-50 px-2`}
         >
             <div>
                 <div className=" min-h-[3rem] border-b-[1px] border-slate-200 py-1">

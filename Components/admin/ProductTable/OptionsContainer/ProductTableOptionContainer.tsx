@@ -50,7 +50,7 @@ export default function ProductTableOptionContainer({
     );
 
     return (
-        <div className="sticky left-0 z-10 flex w-full items-center justify-start space-x-6 border-b-[1px] border-slate-200 py-4 px-1 sm:space-x-12 sm:p-4">
+        <div className="sticky sm:h-[8.25] left-0 top-0 z-50 flex h-[11.75rem] w-full flex-wrap items-center justify-start gap-y-3 gap-x-6 bg-white p-4 xxs:h-[8.25rem] md:h-[5.134rem] sm:gap-x-12">
             <div ref={filterPopupRef} className="relative">
                 <FilterButton
                     filterNumber={filters.length}
