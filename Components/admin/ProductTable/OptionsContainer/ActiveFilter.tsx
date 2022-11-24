@@ -57,7 +57,7 @@ export default function ActiveFilter({
     };
 
     return (
-        <div className="flex flex-row items-center border-b-[1px] border-slate-200 py-2 last:border-none">
+        <div className="flex flex-row items-center py-2 last:border-none">
             <div className="flex flex-col items-stretch gap-y-2 sm:flex-auto sm:flex-row sm:gap-y-0 sm:gap-x-2">
                 <div ref={columnListRef} className="relative flex flex-auto">
                     <button

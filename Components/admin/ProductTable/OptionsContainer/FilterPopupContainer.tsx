@@ -64,7 +64,7 @@ export default function FilterPopupContainer({
                     )}
                 </div>
             </div>
-            <div className="mr-1 flex min-h-[2.5rem] min-w-full flex-col">
+            <div className="border-t-[1px] mr-1 flex min-h-[2.5rem] min-w-full flex-col border-slate-200">
                 <div className="py-2">
                     <button
                         disabled={
