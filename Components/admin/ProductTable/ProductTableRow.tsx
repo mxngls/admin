@@ -7,6 +7,7 @@ interface ProductRow {
   canScroll: boolean;
   productData: ProductData;
   index: number;
+  last: boolean;
   mainImage: string | null;
 }
 
@@ -14,6 +15,7 @@ export default function ProductTableRow({
   canScroll,
   productData,
   index,
+  last,
   mainImage,
 }: ProductRow) {
   const router = useRouter();
@@ -25,13 +27,12 @@ export default function ProductTableRow({
   return (
     <tr
       onClick={() => handleOnClick()}
-      className={`${
-        index % 2 !== 0 ? "bg-white" : "last: border-b-[1px] bg-slate-50"
-      }`}
+      className={`${index % 2 !== 0 ? "bg-white" : "bg-slate-50"}`}
     >
       <ProductTableImage
         mainImage={mainImage}
-        length={columns.length}
+        canScroll={canScroll}
+        last={last}
         index={index}
       />
       {columns.map((attribute, cellIndex) => {
@@ -46,8 +47,8 @@ export default function ProductTableRow({
             value={productData[attribute as keyof ProductData]!}
             key={index + "-row" + cellIndex + "-cell"}
             attribute={attribute}
-            length={columns.length}
             index={index}
+            last={last}
           />
         );
       })}

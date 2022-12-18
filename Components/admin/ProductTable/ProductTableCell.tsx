@@ -22,11 +22,11 @@ export default function ProductTableCell({
 
   useEffect(() => {
     if (canScroll && last) {
-      setBottomBorder(true);
-    } else if (!canScroll && last) {
       setBottomBorder(false);
+    } else if (!canScroll && last) {
+      setBottomBorder(true);
     } else setBottomBorder(true);
-  }, [canScroll, index, last]);
+  }, [canScroll, last]);
 
   return (
     <td
