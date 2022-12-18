@@ -10,6 +10,7 @@ export interface ProductData {
     pieces: number;
     price: number;
     product_id: string;
+    sold: boolean;
 }
 
 export interface ImageData {

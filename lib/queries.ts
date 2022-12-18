@@ -38,7 +38,7 @@ async function fetchProductData(
 
 async function updateProductData(
     column: string,
-    value: string | number,
+    value: string | number | boolean,
     product_id: string
 ): Promise<ProductData | Error> {
     try {
