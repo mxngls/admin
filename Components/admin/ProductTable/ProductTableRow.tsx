@@ -25,9 +25,7 @@ export default function ProductTableRow({
         <tr
             onClick={() => handleOnClick()}
             className={`${
-                index % 2 !== 0
-                    ? "bg-white"
-                    : "last: border-b-[1px] bg-slate-50"
+        index % 2 !== 0 ? "bg-white" : "last: border-b-[1px] bg-slate-50"
             }`}
         >
             <ProductTableImage
@@ -39,9 +37,9 @@ export default function ProductTableRow({
                 return (
                     <ProductTableCell
                         type={
-                            typeof productData[
-                                attribute as keyof ProductData
-                            ]! as "string" | "number"
+              typeof productData[attribute as keyof ProductData]! as
+                | "string"
+                | "number"
                         }
                         value={productData[attribute as keyof ProductData]!}
                         key={index + "-row" + cellIndex + "-cell"}

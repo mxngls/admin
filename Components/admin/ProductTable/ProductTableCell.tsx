@@ -23,17 +23,16 @@ export default function ProductTableCell({
             key={index + "-cell"}
         >
             <div
-                className={`${
-                    type === "number" ? "items-center" : "items-start"
-                } flex`}
+        className={`${type === "number" ? "items-center" : "items-start"} flex`}
             >
+        {type === "number" || type === "string" ? (
                 <span
                     className={`block flex-1 overflow-hidden text-ellipsis whitespace-nowrap ${
-                        type === "number" ? "text-center" : "text-left"
+              type === "number" || value === null ? "text-center" : "text-left"
                     }`}
                 >
                     {formatValue(attribute, value)}
-                </span>
+          </span>
             </div>
         </td>
     );
