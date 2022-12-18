@@ -4,7 +4,6 @@ import React, {
   SetStateAction,
   Dispatch,
   useRef,
-  useLayoutEffect,
 } from "react";
 import { capitalizeFirstLetter } from "../../../lib/helpers";
 import { useClickOutside, useProductAttributeError } from "../../../lib/hooks";
