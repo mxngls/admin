@@ -135,23 +135,21 @@ export default function ProductAttribute({
         onSubmit={handleSubmit}
         ref={formRef}
       >
-        <div className="sm:[70%] flex flex-col justify-between">
-          <input
-            ref={containerRef}
-            autoFocus={true}
-            required={true}
-            value={visibleContent}
-            onKeyDown={(event) => handleKeyPress(event)}
-            onChange={(event) => handleChangeContent(event)}
-            className={`m-0 w-full resize-none overflow-y-hidden border-[1px] border-slate-200 p-[15px] text-slate-700 outline-none placeholder:text-slate-400 ${
-              err.isErr
-                ? "border-2 border-pink-500 p-[14px] text-pink-600 focus:border-pink-500"
-                : "ring-slate-200 hover:ring-2 focus:border-[1px] focus:border-slate-700"
-            } rounded focus:rounded focus:invalid:border-2`}
-          />
-          <div className="my-1 h-5">
-            {err.isErr && <span className="text-pink-600">{err.message}</span>}
-          </div>
+        <input
+          ref={containerRef}
+          autoFocus={true}
+          required={true}
+          value={visibleContent}
+          onKeyDown={(event) => handleKeyPress(event)}
+          onChange={(event) => handleChangeContent(event)}
+          className={`m-0 w-full resize-none overflow-y-hidden border-[1px] border-slate-200 p-[15px] text-slate-700 outline-none placeholder:text-slate-400 ${
+            err.isErr
+              ? "border-2 border-pink-500 text-pink-600 focus:border-pink-500"
+              : "ring-slate-200 hover:ring-2 focus:border-[1px] focus:border-slate-700"
+          } rounded focus:rounded focus:invalid:border-2`}
+        />
+        <div className="my-1 h-5">
+          {err.isErr && <span className="text-pink-600">{err.message}</span>}
         </div>
       </form>
     </div>
