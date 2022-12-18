@@ -1,39 +1,59 @@
+import { useEffect, useState } from "react";
 import { formatValue } from "../../../lib/helpers";
 
 interface ProductCell {
-    attribute: string;
-    value: string | number;
-    type: "string" | "number";
-    length: number;
-    index: number;
+  canScroll: boolean;
+  attribute: string;
+  value: string | number | boolean;
+  type: "string" | "number";
+  index: number;
+  last: boolean;
 }
 
 export default function ProductTableCell({
-    attribute,
-    value,
-    type,
-    length,
-    index,
+  canScroll,
+  attribute,
+  value,
+  type,
+  index,
+  last,
 }: ProductCell) {
-    return (
-        <td
-            className={`w-32 text-ellipsis whitespace-nowrap border-r-[1px] border-slate-200 ${
-                length - 1 !== index ? "border-b-[1px]" : ""
-            } p-4 last:border-r-0`}
-            key={index + "-cell"}
-        >
-            <div
+  const [bottomBorder, setBottomBorder] = useState(true);
+
+  useEffect(() => {
+    if (canScroll && last) {
+      setBottomBorder(true);
+    } else if (!canScroll && last) {
+      setBottomBorder(false);
+    } else setBottomBorder(true);
+  }, [canScroll, index, last]);
+
+  return (
+    <td
+      className={`w-32 border-r-[1px] border-slate-200 ${
+        bottomBorder ? "border-b-[1px]" : "border-b-0"
+      } p-4 last:border-r-0`}
+      key={index + "-cell"}
+    >
+      <div
         className={`${type === "number" ? "items-center" : "items-start"} flex`}
-            >
+      >
         {type === "number" || type === "string" ? (
-                <span
-                    className={`block flex-1 overflow-hidden text-ellipsis whitespace-nowrap ${
+          <span
+            className={`block flex-1 overflow-hidden text-ellipsis whitespace-nowrap ${
               type === "number" || value === null ? "text-center" : "text-left"
-                    }`}
-                >
-                    {formatValue(attribute, value)}
+            }`}
+          >
+            {typeof value !== "boolean" && formatValue(attribute, value)}
           </span>
-            </div>
-        </td>
-    );
+        ) : type === "boolean" ? (
+          <span className="flex flex-1 items-center justify-center">
+            {value ? "Yes" : "No"}
+          </span>
+        ) : (
+          ""
+        )}
+      </div>
+    </td>
+  );
 }

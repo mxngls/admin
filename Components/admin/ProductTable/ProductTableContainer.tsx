@@ -153,6 +153,8 @@ export default function ProductTableContainer({
     const [term, setTerm] = useState<string>("");
     const [filters, setFilters] = useState<Filter[]>([]);
     const [filterPopup, setFilterPopup] = useState<boolean>(false);
+  const containerRef: React.RefObject<HTMLDivElement> = useRef(null);
+  const [canScroll, setCanScroll] = useState(false);
 
     let products = useMemo(() => {
         let searchedProducts = searchProducts(productsData, term);
@@ -189,6 +191,21 @@ export default function ProductTableContainer({
         getMainImages(mainImagesData);
     }, [mainImagesData]);
 
+  useEffect(() => {
+    const checkScroll = () => {
+      if (
+        containerRef.current!.scrollHeight -
+          containerRef.current!.clientHeight ===
+        containerRef.current!.scrollTop
+      ) {
+        setCanScroll(false);
+      } else {
+        setCanScroll(true);
+      }
+    };
+    containerRef.current!.addEventListener("scroll", checkScroll);
+  });
+
     if (products)
         return (
             <div className=" flex flex-col items-center justify-center">
@@ -212,6 +229,7 @@ export default function ProductTableContainer({
                     <table className="w-full table-fixed border-separate border-spacing-0 overflow-auto">
                         <ProductTableHead columnsData={columnsData} />
                         <ProductTableBody
+              canScroll={canScroll}
                             products={products}
                             mainImages={mainImages}
                         />
