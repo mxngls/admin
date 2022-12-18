@@ -39,7 +39,7 @@ const useProductAttributeError = (
                 isErr: true,
                 message: "Please insert a value",
             });
-        } else if (typeof content !== type) {
+        } else if (typeof content !== type || typeof content === undefined) {
             setErr({
                 isErr: true,
                 message: `Please insert a ${type}`,
