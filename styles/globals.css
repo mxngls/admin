@@ -21,6 +21,9 @@ body {
     tbody > tr:first-child > th {
         @apply border-t-0;
     }
+    .break-keep-all {
+        word-break: keep-all;
+    }
 }
 
 h1,
